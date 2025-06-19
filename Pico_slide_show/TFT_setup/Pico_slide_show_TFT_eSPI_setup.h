@@ -9,7 +9,7 @@
 //   Note that some sketches are designed for a particular TFT pixel width/height
 //SETUP for the 128x160 version
 #define ST7735_DRIVER      // Define additional parameters below for this display
-#define TFT_RGB_ORDER TFT_RGB  // Colour order Red-Green-Blue
+#define TFT_RGB_ORDER TFT_BGR  // Colour order Red-Green-Blue
 #define TFT_WIDTH  128
 #define TFT_HEIGHT 128
 #define TFT_INVERSION_ON

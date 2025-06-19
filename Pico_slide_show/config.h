@@ -1,5 +1,5 @@
 //Offset for the 240*240 ST7789 display
-#define x_ori 8
+#define y_ori 8
 #define BITS_PER_PIXEL 16
 #define image_width 128
 #define image_height 112
@@ -26,11 +26,12 @@ const unsigned short int lookup_TFT_RGB565[256] = { 0x0000, 0x0000, 0x0000, 0x00
 
 
 //This array contains preformated pixels for 2bbp png mode, 4 pixels per bytes, assuming a 4x upscaling factor and so 4 consecutive pixels identical stored per bytes
-unsigned char image_palette[4] = { 0b00000000, 0b01010101, 0b10101010, 0b11111111 };  //lookup table for PNG 2 bpp format. 1 byte = 4 identical pixels on a line
+unsigned char image_palette[4] = {0b11111111, 0b10101010, 0b01010101, 0b00000000 };  //lookup table for PNG 2 bpp format. 1 byte = 4 identical pixels on a line
 unsigned char local_byte_LSB = 0;                          //storage byte for conversion
 unsigned char local_byte_MSB = 0;                          //storage byte for conversion
 unsigned char pixel_level = 0;                             //storage byte for conversion
 unsigned int graphical_DATA_offset = 0;                       //counter for data bytes
+unsigned int image_random = 0;
 unsigned int DATA_bytes_counter = 0;                       //counter for data bytes
 unsigned int pixel_line = 0;                      
 unsigned int DATA_bytes_to_print = 0;                      //counter for data bytes
