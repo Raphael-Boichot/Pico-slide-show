@@ -14,7 +14,7 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
     **#include <Pico_slide_show_TFT_eSPI_setup.h> // Default setup is root library folder**
 - Install [GNU Octave](https://www.octave.org/). It is a multi-OS computing langage requiring no dependancies;
 - drop Game Boy Camera saves into the **/saves** folder. You can drop and show as much as 18 saves in a row;
-- run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves to C compatble data;
+- run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves to C compatible data;
 - open **Pico_slide_show.ino** from the Arduino IDE;
 - Compile your code and drop the uf2 to you board.
 
