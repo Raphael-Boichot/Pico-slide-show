@@ -22,37 +22,48 @@ void setup(void) {
 
 void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, november 2024
 {
-  image_random = getRandom(images);
+  image_random = random(images);
   //Serial.println(image_random,DEC);
   graphical_DATA_offset = image_random * tile_packet_size;  //starting offset to get tile data
 
   for (int i = 0; i < tile_packet_size; i++) {
     tile_DATA_buffer[i] = graphical_DATA[i + graphical_DATA_offset];
   }
+
+  //this part of code takes 3584 bytes (16 bytes per tile) and turns it into a 128x112 image
   max_tile_line = image_height / 8;
   max_tile_column = image_width / 8;
   IMAGE_bytes_counter = 0;
   pixel_line = 0;
   offset_x = 0;
 
-  for (int tile_line = 0; tile_line < max_tile_line; tile_line++) {              //this part fills 8 lines of pixels
-    IMAGE_bytes_counter = 16 * max_tile_column * tile_line;                      //a tile is 16 bytes, a line screen is 20 tiles (160 pixels width)
-    for (int i = 0; i < 8; i++) {                                                // This part fills a line of pixels
-      offset_x = pixel_line * image_width;                                       //x stands for the position in the image vector containing compressed data
-      for (int tile_column = 0; tile_column < max_tile_column; tile_column++) {  //we progress along 20 column tiles
-        local_byte_LSB = tile_DATA_buffer[IMAGE_bytes_counter];                  //here we get data for a line of 8 pixels (2 bytes)
-        local_byte_MSB = tile_DATA_buffer[IMAGE_bytes_counter + 1];              //here we get data for a line of 8 pixels
-        for (int posx = 0; posx < 8; posx++) {
-          pixel_level = bitRead(local_byte_LSB, 7 - posx) + 2 * bitRead(local_byte_MSB, 7 - posx);  //here we get pixel value along 8 pixels horizontally
-          pixel_DATA_buffer[offset_x + posx] = image_palette[pixel_level];   //here we store 4 2bbp pixels per byte for next step (2bpp indexed png upscaler)
-        }                                                                    //this is a bit aggressive as pixel decoder and PNG compression is within the same line of code, but efficient
-        IMAGE_bytes_counter = IMAGE_bytes_counter + 16;                      //jumps to the next tile in byte
-        offset_x = offset_x + 8;                                             //jumps to the next tile in pixels
-      }                                                                      //This part fills a line of pixels
-      IMAGE_bytes_counter = IMAGE_bytes_counter - 16 * max_tile_column + 2;  //shifts to the next two bytes among 16 per tile, so the next line of pixels in a tile
-      pixel_line = pixel_line + 1;                                           //jumps to the next line
-    }                                                                        //This part fills 8 lines of pixels
-  }                                                                          //this part fills the entire image
+  for (int tile_line = 0; tile_line < max_tile_line; tile_line++) {
+  IMAGE_bytes_counter = 16 * max_tile_column * tile_line;
+
+  for (int i = 0; i < 8; i++) {
+    offset_x = pixel_line * image_width;
+
+    for (int tile_column = 0; tile_column < max_tile_column; tile_column++) {
+      uint8_t local_byte_LSB = tile_DATA_buffer[IMAGE_bytes_counter];
+      uint8_t local_byte_MSB = tile_DATA_buffer[IMAGE_bytes_counter + 1];
+
+      for (int posx = 0; posx < 8; posx++) {
+        uint8_t mask = 1 << (7 - posx);  // Create mask to isolate bit
+        uint8_t bit_lsb = (local_byte_LSB & mask) ? 1 : 0;
+        uint8_t bit_msb = (local_byte_MSB & mask) ? 1 : 0;
+        uint8_t pixel_level = (bit_msb << 1) | bit_lsb;
+
+        pixel_DATA_buffer[offset_x + posx] = image_palette[pixel_level];
+      }
+
+      IMAGE_bytes_counter += 16;  // Next tile in row
+      offset_x += 8;
+    }
+
+    IMAGE_bytes_counter = IMAGE_bytes_counter - 16 * max_tile_column + 2;  // Next row in tiles
+    pixel_line++;
+  }
+}
 
   for (int x = 0; x < image_width; x++) {
     for (int y = 0; y < image_height; y++) {
@@ -61,12 +72,4 @@ void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, novem
   }
   img.pushSprite(0, y_ori);  //dump image to display
   delay(slide_show_delay);
-}  // loop1()
-/////////////Specific to TinyGB Printer//////////////
-
-int getRandom(int X) {
-  if (X <= 0) {
-    return 0;  // Return 0 if invalid input
-  }
-  return random(X);  // random(X) returns a value from 0 to X-1
 }

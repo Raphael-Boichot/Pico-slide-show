@@ -7,18 +7,13 @@
 //   If this file is edited correctly then all the library example sketches should
 //   run without the need to make any more changes for a particular hardware setup!
 //   Note that some sketches are designed for a particular TFT pixel width/height
-//SETUP for the 128x160 version
+//SETUP for the 128x128 version
 #define ST7735_DRIVER      // Define additional parameters below for this display
 #define TFT_RGB_ORDER TFT_BGR  // Colour order Red-Green-Blue
 #define TFT_WIDTH  128
 #define TFT_HEIGHT 128
 #define TFT_INVERSION_ON
 #define ST7735_GREENTAB2
-//SETUP for the 240x240 version
-//#define ST7789_DRIVER      // Full configuration option, define additional parameters below for this display
-//#define TFT_RGB_ORDER TFT_BGR  // Colour order Blue-Green-Red
-//#define TFT_WIDTH  240 // ST7789 240 x 240 and 240 x 320
-//#define TFT_HEIGHT 240 // ST7789 240 x 240
 
 //other universal parameters
 #define USER_SETUP_ID 60

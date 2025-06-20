@@ -1,59 +1,92 @@
-%By Raphaël BOICHOT, june 2025
-%can be run with Matlab or GNU Octave
-clc
-clear
-slide_show_delay_ms=1000;
+% By Raphael BOICHOT, June 2025
+% Compatible with MATLAB and GNU Octave
+
+clc;
+clear;
+
+% Parameters
+slide_show_delay_ms = 100;
+chunk_size = 3584;          % 3584 bytes per image
+chunks_per_file = 30;       % 30 images per .sav file
+start_offset = 8193;        % Starting byte for first chunk
+block_spacing = 4096;       % Bytes between chunks
+
+% Collect save files
 listing = dir('./saves/*.sav*');
-binary=[];
-binary_data=[];
-images=30*length(listing);
-disp('Extracting image data from saves')
-for i=1:1:length(listing)
-  name=['./saves/',listing(i).name];
-  fid = fopen(name,'r');
-  binary=fread(fid);
-  for i=1:1:30
-    start=8193+4096*(i-1);
-    ending=start+3583;
-    binary_data=[binary_data;binary(start:ending)];
-  end
-  fclose(fid);
+num_files = length(listing);
+total_chunks = chunks_per_file * num_files;
+images = total_chunks;
+
+% Preallocate data array
+binary_data = zeros(images * chunk_size, 1, 'uint8');
+
+% === Extract Image Data ===
+disp('Extracting image data from saves');
+idx = 1;
+
+for i = 1:num_files
+    filename = ['./saves/', listing(i).name];
+    fid = fopen(filename, 'r');
+    if fid == -1
+        warning('Could not open file: %s', filename);
+        continue;
+    end
+    binary = fread(fid, inf, 'uint8');
+    fclose(fid);
+
+    for j = 0:(chunks_per_file - 1)
+        start_byte = start_offset + block_spacing * j;
+        end_byte = start_byte + chunk_size - 1;
+        if end_byte <= length(binary)
+            binary_data(idx:idx+chunk_size-1) = binary(start_byte:end_byte);
+            idx = idx + chunk_size;
+        else
+            warning('Skipped incomplete chunk in %s at block %d', filename, j+1);
+        end
+    end
 end
 
-disp('Storing binary data')
-fid = fopen('binary.dat','w');
-fwrite(fid,binary_data);
+% Trim to actual size in case some files/chunks were incomplete
+binary_data = binary_data(1:idx-1);
+
+% === Store Raw Binary Data ===
+disp('Storing binary data');
+fid = fopen('binary.dat', 'w');
+fwrite(fid, binary_data, 'uint8');
 fclose(fid);
 
-disp('Generating header file for Arduino IDE')
+% === Generate Preview Image ===
+disp('Generating an image file for checking');
+data_viewer(binary_data, 'preview.png');
 
-fid = fopen('binary.dat','r');
-binary_data=fread(fid);
-fclose(fid);
+% === Generate Arduino Header File ===
+disp('Generating header file for Arduino IDE');
+fid = fopen('graphical_data.h', 'w');
+fprintf(fid, 'const unsigned int images = %d;\n', images);
+fprintf(fid, 'const unsigned int slide_show_delay = %d;\n\n', slide_show_delay_ms);
+fprintf(fid, 'const uint8_t graphical_DATA[] = {\n');
 
-fid=fopen('graphical_data.h','w');
-counter=0;
-
-fprintf(fid,'const unsigned int images = ');
-fprintf(fid,'%d',images);
-fprintf(fid,';');
-fprintf(fid,'\n');
-fprintf(fid,'const unsigned int slide_show_delay = ');
-fprintf(fid,'%d',slide_show_delay_ms);
-fprintf(fid,';');
-fprintf(fid,'\n\r');
-
-
-fprintf(fid,'const byte graphical_DATA[] = {');
-for i=1:1:length(binary_data)
-       counter=counter+1;
-       fprintf(fid,'0x');
-       if binary_data(i)<=0xF; fprintf(fid,'0');end;
-      fprintf(fid,'%X',binary_data(i));
-      fprintf(fid,',');
-      if rem(counter,16)==0;fprintf(fid,'\n'); end;
+% Format as hex table, 16 bytes per line
+for i = 1:length(binary_data)
+    if mod(i - 1, 16) == 0
+        fprintf(fid, '  ');
+    end
+    fprintf(fid, '0x%02X', binary_data(i));
+    if i < length(binary_data)
+        fprintf(fid, ',');
+    end
+    if mod(i, 16) == 0
+        fprintf(fid, '\n');
+    else
+        fprintf(fid, ' ');
+    end
 end
-fseek(fid,-2,'cof');
-fprintf(fid,'};');
+
+if mod(length(binary_data), 16) ~= 0
+    fprintf(fid, '\n');
+end
+
+fprintf(fid, '};\n');
 fclose(fid);
-disp('Done, you can compile the code')
+
+disp('Done, you can compile the code !');

@@ -26,6 +26,7 @@ const unsigned short int lookup_TFT_RGB565[256] = { 0x0000, 0x0000, 0x0000, 0x00
 
 
 //This array contains preformated pixels for 2bbp png mode, 4 pixels per bytes, assuming a 4x upscaling factor and so 4 consecutive pixels identical stored per bytes
+//Game Boy data file are inverted contrary to modern display when recovered pixel by pixel: 3 is black and 0 is white
 unsigned char image_palette[4] = {0b11111111, 0b10101010, 0b01010101, 0b00000000 };  //lookup table for PNG 2 bpp format. 1 byte = 4 identical pixels on a line
 unsigned char local_byte_LSB = 0;                          //storage byte for conversion
 unsigned char local_byte_MSB = 0;                          //storage byte for conversion
