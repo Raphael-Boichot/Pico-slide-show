@@ -1,5 +1,6 @@
 # Flex with your Game Boy Camera images
-This project is a simple base for a digital frame showing Game Boy Camera images.
+
+This project is a simple base for a tiny digital frame showing Game Boy Camera images. It is small and portable, powered by a single CR2032 battery. 
 
 ## Environment Configuration
 
@@ -25,6 +26,7 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
 - A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html)  whatever height, that can be harvested on any dead electronic suff so it is common.
 - 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power and the display backlight which draws more current (30 mA) than the Pi Pico (25 mA) itself, for saving battery in case of long timelapses for example.
+- A [CR2032 battery holder](https://aliexpress.com/item/1005006357635710.html) to solder. The battery should last about 5 hours of continuous display.
 
 ## Kind warning
 The code and current design come as is. If you're not happy with the current hardware, the PCB EasyEDA design or the Arduino IDE, create your own, the licence allows it !
