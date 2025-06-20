@@ -1,5 +1,9 @@
 //Offset for the 240*240 ST7789 display
 #define y_ori 8
+#define TFT_BL 7
+#define BTN_PUSH 8
+#define LED_STATUS_PIN 16  // Internal LED is 16 on the RP2040zero
+#define NUMPIXELS 1        // NeoPixel ring size (just internal LED here)
 #define BITS_PER_PIXEL 16
 #define image_width 128
 #define image_height 112
