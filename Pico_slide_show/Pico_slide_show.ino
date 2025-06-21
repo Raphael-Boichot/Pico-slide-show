@@ -85,9 +85,7 @@ void dump_image_to_display(int image_random) {
           uint8_t mask = 1 << (7 - posx);  // Create mask to isolate bit
           uint8_t bit_lsb = (local_byte_LSB & mask) ? 1 : 0;
           uint8_t bit_msb = (local_byte_MSB & mask) ? 1 : 0;
-          uint8_t pixel_level = (bit_msb << 1) | bit_lsb;
-
-          pixel_DATA_buffer[offset_x + posx] = pixel_level;
+          pixel_DATA_buffer[offset_x + posx] = (bit_msb << 1) | bit_lsb;//storing pixel level 0(white)..3(dark)
         }
 
         IMAGE_bytes_counter += 16;  // Next tile in row

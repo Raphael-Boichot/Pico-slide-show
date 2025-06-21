@@ -12,11 +12,13 @@ byte tile_DATA_buffer[tile_packet_size];  //number of bytes in tile data, 1 tile
 byte pixel_DATA_buffer[image_width * image_height];
 unsigned short int lookup_TFT_RGB565[4];  //Default palette
 unsigned char palette_index = 0;
-unsigned char palette_number = 3;
+unsigned char palette_number = 4;
 unsigned short int palette_storage[] = {
+  //beware, palette is inverted compared to normal display in the Game Boy Format
   0xFFFF, 0x94B2, 0x31A6, 0x0000,  //default grayscale
-  0xFFFF, 0x7FE6, 0x0A5E, 0x0000,  //GBC
-  0x94C1, 0x4BE5, 0x2B08, 0x2080   //DMG
+  0xFFFF, 0x6FE5, 0x1BBA, 0x0000,  //GBC
+  0x94C1, 0x4BE5, 0x2B08, 0x2080,  //DMG
+  0xC614, 0x8C8D, 0x4A87, 0x1082   //GBP
 };
 
 //This array contains preformated pixels for 2bbp png mode, 4 pixels per bytes, assuming a 4x upscaling factor and so 4 consecutive pixels identical stored per bytes
