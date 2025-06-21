@@ -5,7 +5,7 @@ clc;
 clear;
 
 % Parameters
-slide_show_delay_ms = 1000;
+slide_show_delay_ms = 2000;
 chunk_size = 3584;          % 3584 bytes per image
 chunks_per_file = 30;       % 30 images per .sav file
 start_offset = 8193;        % Starting byte for first chunk
@@ -56,8 +56,8 @@ fwrite(fid, binary_data, 'uint8');
 fclose(fid);
 
 % === Generate Preview Image ===
-disp('Generating an image file for checking');
-data_viewer(binary_data, 'preview.png');
+%disp('Generating an image file for checking');
+%data_viewer(binary_data, 'preview.png');
 
 % === Generate Arduino Header File ===
 disp('Generating header file for Arduino IDE');

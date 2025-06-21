@@ -21,7 +21,7 @@ void setup(void) {
   tft.init();
   tft.setTextSize(2);
   img.setColorDepth(BITS_PER_PIXEL);  // Set colour depth first
-  tft.setRotation(3);
+  tft.setRotation(2);
   tft.fillScreen(TFT_BLACK);
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
   img.fillScreen(TFT_RED);
