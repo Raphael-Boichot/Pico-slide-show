@@ -35,7 +35,7 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 - Put a CR2032 battery and switch the power on.
 - Push the button to change the palette.
-- Flex.
+- Flex with your Pico Slide Show.
 
 ## Kind warning
 
