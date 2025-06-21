@@ -32,16 +32,34 @@ void setup(void) {
   gpio_init(TFT_BL);  // configure BL as output, allows deactivating it via software in the future
   gpio_set_dir(TFT_BL, GPIO_OUT);
   gpio_put(TFT_BL, 1);
+  image_random = random(images);
+  load_palette(palette_index);
 }  // setup()
 
 /////////////Specific to TinyGB Printer//////////////
 
 void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, november 2024
 {
-  image_random = random(images);
+  if (gpio_get(BTN_PUSH)) {
+    palette_index++;
+    if (palette_index >= palette_number) {
+      palette_index = 0;
+    }
+    load_palette(palette_index);
+    dump_image_to_display(image_random);
+    delay(debounceDelay);
+  }
+  currentMillis = millis();
+  if (currentMillis - previousMillis >= slide_show_delay) {
+    previousMillis = currentMillis;
+    image_random = random(images);
+    dump_image_to_display(image_random);
+  }
+}
+
+void dump_image_to_display(int image_random) {
   //Serial.println(image_random,DEC);
   graphical_DATA_offset = image_random * tile_packet_size;  //starting offset to get tile data
-
   for (int i = 0; i < tile_packet_size; i++) {
     tile_DATA_buffer[i] = graphical_DATA[i + graphical_DATA_offset];
   }
@@ -69,7 +87,7 @@ void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, novem
           uint8_t bit_msb = (local_byte_MSB & mask) ? 1 : 0;
           uint8_t pixel_level = (bit_msb << 1) | bit_lsb;
 
-          pixel_DATA_buffer[offset_x + posx] = image_palette[pixel_level];
+          pixel_DATA_buffer[offset_x + posx] = pixel_level;
         }
 
         IMAGE_bytes_counter += 16;  // Next tile in row
@@ -87,5 +105,10 @@ void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, novem
     }
   }
   img.pushSprite(0, y_ori);  //dump image to display
-  delay(slide_show_delay);
+}
+
+void load_palette(int indice) {
+  for (int i = 0; i < 4; i++) {  //load palette
+    lookup_TFT_RGB565[i] = palette_storage[i + indice * 4];
+  }
 }

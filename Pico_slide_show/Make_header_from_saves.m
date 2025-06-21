@@ -5,7 +5,7 @@ clc;
 clear;
 
 % Parameters
-slide_show_delay_ms = 100;
+slide_show_delay_ms = 1000;
 chunk_size = 3584;          % 3584 bytes per image
 chunks_per_file = 30;       % 30 images per .sav file
 start_offset = 8193;        % Starting byte for first chunk
@@ -88,5 +88,5 @@ end
 
 fprintf(fid, '};\n');
 fclose(fid);
-
+msgbox('Done !')
 disp('Done, you can compile the code !');

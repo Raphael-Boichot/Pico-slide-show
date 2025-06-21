@@ -1,47 +1,39 @@
 //Offset for the 240*240 ST7789 display
 #define y_ori 8
 #define TFT_BL 7
-#define BTN_PUSH 8
+#define BTN_PUSH 13        // 8 in real, 13 just for testing with another board
 #define LED_STATUS_PIN 16  // Internal LED is 16 on the RP2040zero
 #define NUMPIXELS 1        // NeoPixel ring size (just internal LED here)
 #define BITS_PER_PIXEL 16
 #define image_width 128
 #define image_height 112
-#define tile_packet_size 16*(image_width*image_height)/64
-byte tile_DATA_buffer[tile_packet_size];//number of bytes in tile data, 1 tile is 16 bytes
-byte pixel_DATA_buffer[image_width*image_height];
-//grayscale 8 bits table to RGB565
-const unsigned short int lookup_TFT_RGB565[256] = { 0x0000, 0x0000, 0x0000, 0x0000, 0x0020, 0x0020, 0x0020, 0x0020, 0x0841, 0x0841, 0x0841, 0x0841, 0x0861, 0x0861, 0x0861, 0x0861,
-                                                    0x1082, 0x1082, 0x1082, 0x1082, 0x10A2, 0x10A2, 0x10A2, 0x10A2, 0x18C3, 0x18C3, 0x18C3, 0x18C3, 0x18E3, 0x18E3, 0x18E3, 0x18E3,
-                                                    0x2104, 0x2104, 0x2104, 0x2104, 0x2124, 0x2124, 0x2124, 0x2124, 0x2945, 0x2945, 0x2945, 0x2945, 0x2965, 0x2965, 0x2965, 0x2965,
-                                                    0x3186, 0x3186, 0x3186, 0x3186, 0x31A6, 0x31A6, 0x31A6, 0x31A6, 0x39C7, 0x39C7, 0x39C7, 0x39C7, 0x39E7, 0x39E7, 0x39E7, 0x39E7,
-                                                    0x4208, 0x4208, 0x4208, 0x4208, 0x4228, 0x4228, 0x4228, 0x4228, 0x4A49, 0x4A49, 0x4A49, 0x4A49, 0x4A69, 0x4A69, 0x4A69, 0x4A69,
-                                                    0x528A, 0x528A, 0x528A, 0x528A, 0x52AA, 0x52AA, 0x52AA, 0x52AA, 0x5ACB, 0x5ACB, 0x5ACB, 0x5ACB, 0x5AEB, 0x5AEB, 0x5AEB, 0x5AEB,
-                                                    0x630C, 0x630C, 0x630C, 0x630C, 0x632C, 0x632C, 0x632C, 0x632C, 0x6B4D, 0x6B4D, 0x6B4D, 0x6B4D, 0x6B6D, 0x6B6D, 0x6B6D, 0x6B6D,
-                                                    0x738E, 0x738E, 0x738E, 0x738E, 0x73AE, 0x73AE, 0x73AE, 0x73AE, 0x7BCF, 0x7BCF, 0x7BCF, 0x7BCF, 0x7BEF, 0x7BEF, 0x7BEF, 0x7BEF,
-                                                    0x8410, 0x8410, 0x8410, 0x8410, 0x8430, 0x8430, 0x8430, 0x8430, 0x8C51, 0x8C51, 0x8C51, 0x8C51, 0x8C71, 0x8C71, 0x8C71, 0x8C71,
-                                                    0x9492, 0x9492, 0x9492, 0x9492, 0x94B2, 0x94B2, 0x94B2, 0x94B2, 0x9CD3, 0x9CD3, 0x9CD3, 0x9CD3, 0x9CF3, 0x9CF3, 0x9CF3, 0x9CF3,
-                                                    0xA514, 0xA514, 0xA514, 0xA514, 0xA534, 0xA534, 0xA534, 0xA534, 0xAD55, 0xAD55, 0xAD55, 0xAD55, 0xAD75, 0xAD75, 0xAD75, 0xAD75,
-                                                    0xB596, 0xB596, 0xB596, 0xB596, 0xB5B6, 0xB5B6, 0xB5B6, 0xB5B6, 0xBDD7, 0xBDD7, 0xBDD7, 0xBDD7, 0xBDF7, 0xBDF7, 0xBDF7, 0xBDF7,
-                                                    0xC618, 0xC618, 0xC618, 0xC618, 0xC638, 0xC638, 0xC638, 0xC638, 0xCE59, 0xCE59, 0xCE59, 0xCE59, 0xCE79, 0xCE79, 0xCE79, 0xCE79,
-                                                    0xD69A, 0xD69A, 0xD69A, 0xD69A, 0xD6BA, 0xD6BA, 0xD6BA, 0xD6BA, 0xDEDB, 0xDEDB, 0xDEDB, 0xDEDB, 0xDEFB, 0xDEFB, 0xDEFB, 0xDEFB,
-                                                    0xE71C, 0xE71C, 0xE71C, 0xE71C, 0xE73C, 0xE73C, 0xE73C, 0xE73C, 0xEF5D, 0xEF5D, 0xEF5D, 0xEF5D, 0xEF7D, 0xEF7D, 0xEF7D, 0xEF7D,
-                                                    0xF79E, 0xF79E, 0xF79E, 0xF79E, 0xF7BE, 0xF7BE, 0xF7BE, 0xF7BE, 0xFFDF, 0xFFDF, 0xFFDF, 0xFFDF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF };
-
+#define tile_packet_size 16 * (image_width * image_height) / 64
+byte tile_DATA_buffer[tile_packet_size];  //number of bytes in tile data, 1 tile is 16 bytes
+byte pixel_DATA_buffer[image_width * image_height];
+unsigned short int lookup_TFT_RGB565[4];  //Default palette
+unsigned char palette_index = 0;
+unsigned char palette_number = 3;
+unsigned short int palette_storage[] = {
+  0xFFFF, 0x94B2, 0x31A6, 0x0000,  //default grayscale
+  0xFFFF, 0x7FE6, 0x0A5E, 0x0000,  //GBC
+  0x94C1, 0x4BE5, 0x2B08, 0x2080   //DMG
+};
 
 //This array contains preformated pixels for 2bbp png mode, 4 pixels per bytes, assuming a 4x upscaling factor and so 4 consecutive pixels identical stored per bytes
 //Game Boy data file are inverted contrary to modern display when recovered pixel by pixel: 3 is black and 0 is white
-unsigned char image_palette[4] = {0b11111111, 0b10101010, 0b01010101, 0b00000000 };  //lookup table for PNG 2 bpp format. 1 byte = 4 identical pixels on a line
-unsigned char local_byte_LSB = 0;                          //storage byte for conversion
-unsigned char local_byte_MSB = 0;                          //storage byte for conversion
-unsigned char pixel_level = 0;                             //storage byte for conversion
-unsigned int graphical_DATA_offset = 0;                       //counter for data bytes
+unsigned char local_byte_LSB = 0;        //storage byte for conversion
+unsigned char local_byte_MSB = 0;        //storage byte for conversion
+unsigned char pixel_level = 0;           //storage byte for conversion
+unsigned int graphical_DATA_offset = 0;  //counter for data bytes
 unsigned int image_random = 0;
-unsigned int DATA_bytes_counter = 0;                       //counter for data bytes
-unsigned int pixel_line = 0;                      
-unsigned int DATA_bytes_to_print = 0;                      //counter for data bytes
-unsigned int IMAGE_bytes_counter = 0;                      //counter for data bytes
-unsigned int offset_x = 0;                                 //local variable for decoder
-unsigned int max_tile_line = 0;                            //local variable for decoder
-unsigned int max_tile_column = 0;                            //local variable for decoder
-unsigned int max_pixel_line = 0;                           //local variable for decoder
+unsigned int DATA_bytes_counter = 0;  //counter for data bytes
+unsigned int pixel_line = 0;
+unsigned int DATA_bytes_to_print = 0;  //counter for data bytes
+unsigned int IMAGE_bytes_counter = 0;  //counter for data bytes
+unsigned int offset_x = 0;             //local variable for decoder
+unsigned int max_tile_line = 0;        //local variable for decoder
+unsigned int max_tile_column = 0;      //local variable for decoder
+unsigned int max_pixel_line = 0;       //local variable for decoder
+unsigned long currentMillis = 0;
+unsigned long previousMillis = 0;
+const unsigned long debounceDelay = 200;  // 200 ms debounce time
