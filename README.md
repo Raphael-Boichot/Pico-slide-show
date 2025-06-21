@@ -34,6 +34,7 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 ## User Manual in 3 steps
 
 - Put a CR2032 battery and switch the power on. - Push the button to change the palette.
+
 - Flex.
 
 ## Kind warning
