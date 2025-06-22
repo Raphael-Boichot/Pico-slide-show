@@ -11,7 +11,7 @@ chunks_per_file = 30;       % 30 images per .sav file
 start_offset = 8193;        % Starting byte for first chunk
 block_spacing = 4096;       % Bytes between chunks
 
-% Collect save files
+% Collect save files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 listing = dir('./saves/*.sav*');
 num_files = length(listing);
 total_chunks = chunks_per_file * num_files;
@@ -48,6 +48,23 @@ end
 
 % Trim to actual size in case some files/chunks were incomplete
 binary_data = binary_data(1:idx-1);
+% Collect save files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Collect image files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+imagefiles = [dir('Images/*.png'); dir('Images/*.jpg'); dir('Images/*.jpeg'); dir('Images/*.bmp'); dir('Images/*.gif')];
+num_files = length(imagefiles);
+
+% === Extract Image Data ===
+disp('Extracting image data from images');
+for i = 1:num_files
+    filename = ['./Images/', imagefiles(i).name];
+    [image_OK,DATA]=image_converter(filename);
+    if image_OK==1
+    binary_data = [binary_data,DATA];
+    images=images+1;
+    end
+end
+% Collect image files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % === Store Raw Binary Data ===
 disp('Storing binary data');
@@ -56,8 +73,8 @@ fwrite(fid, binary_data, 'uint8');
 fclose(fid);
 
 % === Generate Preview Image ===
-%disp('Generating an image file for checking');
-%data_viewer(binary_data, 'preview.png');
+disp('Generating an image file for checking');
+data_viewer(binary_data, 'preview.png');
 
 % === Generate Arduino Header File ===
 disp('Generating header file for Arduino IDE');
@@ -88,5 +105,5 @@ end
 
 fprintf(fid, '};\n');
 fclose(fid);
-msgbox('Done !')
+msgbox('Done !');
 disp('Done, you can compile the code !');

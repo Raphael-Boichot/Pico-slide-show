@@ -3,20 +3,10 @@
 #include <TFT_eSPI.h>  // Hardware-specific library
 #include <SPI.h>
 #include <hardware/gpio.h>
-#include <Adafruit_NeoPixel.h>
 TFT_eSPI tft = TFT_eSPI();            // Invoke custom library
 TFT_eSprite img = TFT_eSprite(&tft);  // Create Sprite object "img" with pointer to "tft" object
 
 void setup(void) {
-  //Set up the display
-  Adafruit_NeoPixel pixels(NUMPIXELS, LED_STATUS_PIN, NEO_RGB);
-  uint8_t intensity = 60;                                 //WS2812 intensity 255 is a death ray, 10 to 15 is normal
-  uint32_t WS2812_Color = pixels.Color(0, intensity, 0);  //RGB triplet, default is green
-  pixels.setPixelColor(0, WS2812_Color);
-  pixels.show();  // Send the updated pixel colors to the hardware.
-  delay(1000);
-  pixels.clear();  // Set all pixel colors to 'off'
-  pixels.show();   // Send the updated pixel colors to the hardware.
   //Set up the display
   tft.init();
   tft.setTextSize(2);
@@ -24,8 +14,6 @@ void setup(void) {
   tft.setRotation(2);
   tft.fillScreen(TFT_BLACK);
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
-  img.fillScreen(TFT_RED);
-  img.pushSprite(0, y_ori);  //dump image to display
   //Serial.begin(115200);
   gpio_init(BTN_PUSH);  // Configure BTN_PUSH as input
   gpio_set_dir(BTN_PUSH, GPIO_IN);
