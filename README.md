@@ -12,12 +12,12 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
     **#include <Pico_slide_show_TFT_eSPI_setup.h> // Default setup is root library folder**
 - Install [GNU Octave](https://www.octave.org/). It is a multi-OS computing langage requiring no dependancies used to convert save files.
 
-## User manual
+## Image conversion and compiling
 
 - Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images in the **/Images** folder . You can drop and show as much as 18 saves in a row;
 - Run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves to C compatible data. You can set the delay between images from this script;
 - Open **Pico_slide_show.ino** with the Arduino IDE;
-- Compile your code with the RP2040 core (select the Raspberry Pi Pico board) and upload or drop the pre-compiled .uf2 to you board.
+- Compile your code with the RP2040 core (select the Raspberry Pi Pico board and compile @50Hz) and upload or drop the pre-compiled .uf2 to you board.
 
 ## Parts needed to build the device
 
