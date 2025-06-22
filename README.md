@@ -30,11 +30,12 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
 
 PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). Eu citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs (taxes paid at order). I've never had any quality issue with them. Just drop the gerber to their site and order with default parameters (the cheapest by default). Considering that you yet have very basic soldering hardware (and skill), each populated PCB should cost you about 5€ maximum.
 
-## User Manual in 3 steps
+## User Manual in 4 steps
 
 - Put a CR2032 battery and switch the power on.
 - Push the button to change the palette.
 - Flex with your Pico Slide Show.
+- Regret using disposable lithium batteries for such a futile use.
 
 ## Kind warning
 
