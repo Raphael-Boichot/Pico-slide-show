@@ -1,6 +1,6 @@
 # Flex with your Game Boy Camera images
 
-This project is a simple base for a tiny digital frame showing Game Boy Camera images. It is small and portable, powered by a single CR2032 battery. 
+This project is a simple base for a tiny digital frame showing Game Boy Camera images. It is small and portable, powered by a single CR2032 lithium battery.
 
 ## Environment configuration
 
