@@ -1,112 +1,92 @@
-function [image_OK,DATA]=image_converter(currentfilename)
+function [image_OK, DATA] = image_converter(currentfilename)
   try
     pkg load image
   end
-  DATA=[];
-  image_OK=0;
-  close all
-  packets=0;
-  [a,map]=imread(currentfilename);
-  if not(isempty(map));%dealing with indexed images
-    a=ind2gray(a,map);
-  end
-  [height, width, layers]=size(a);
-  a=a(:,:,1);
-  C=unique(a);
 
-  if height==112 && width==128
-    disp([currentfilename, ' is a legit image without borders, converting...'])
-    image_OK=1;
+  DATA = [];
+  image_OK = 0;
+  close all;
+
+  %% --- Load Image ---
+  [a, map] = imread(currentfilename);
+  if ~isempty(map)
+    a = ind2gray(a, map);
+  end
+  a = a(:,:,1);  % Only 1 channel
+
+  [height, width] = size(a);
+
+  %% --- Format Detection and Adjustment ---
+  if height == 112 && width == 128
+    disp([currentfilename, ' is a legit image without borders, converting...']);
+    image_OK = 1;
+
+  elseif height == 144 && width == 160
+    disp([currentfilename, ' is a legit image with borders, extracting...']);
+    a = a(17:17+111, 17:17+127);
+    image_OK = 1;
+
+  elseif mod(width,128) == 0 && mod(height,112) == 0
+    disp([currentfilename, ' is an upscaled image without borders, downscaling...']);
+    a = imresize(a, [112, 128], 'nearest');
+    image_OK = 1;
+
+  elseif mod(width,160) == 0 && mod(height,144) == 0
+    disp([currentfilename, ' is an upscaled image with borders, downscaling and extracting...']);
+    a = imresize(a, [144, 160], 'nearest');
+    a = a(17:17+111, 17:17+127);
+    image_OK = 1;
+
+  else
+    disp([currentfilename, ' has unsupported dimensions and is rejected.']);
+    return;
   end
 
-  if height==144 && width==160
-    disp([currentfilename, ' is a legit image with borders, extracting...'])
-    a=a(17:17+111,17:17+127);
-    image_OK=1;
+  %% --- Validate Color Palette ---
+  C = unique(a);
+  if length(C) == 1 || length(C) > 4
+    disp([currentfilename, ' rejected due to invalid color count.']);
+    image_OK = 0;
+    return;
   end
 
-  if image_OK==0
-    if rem(width,128)==0 && rem(height,112)==0
-      disp([currentfilename, ' is an upscaled image without borders, downscaling...'])
-      a=imresize(a,128/width,'nearest');
-      image_OK=1;
+  %% --- Map Colors to Levels ---
+  switch length(C)
+    case 4
+      Black = C(1); Dgray = C(2); Lgray = C(3); White = C(4);
+    case 3
+      Black = C(1); Dgray = C(2); Lgray = [];   White = C(3);
+    case 2
+      Black = C(1); Dgray = [];   Lgray = [];   White = C(2);
+  end
+
+  %% --- Tile Conversion ---
+  [height, width] = size(a);
+  hor_tile = width / 8;
+  vert_tile = height / 8;
+  total_tiles = hor_tile * vert_tile;
+
+  DATA = zeros(1, total_tiles * 16, 'uint8');  % Preallocate
+  data_index = 1;
+  pow2 = uint8(2.^(7:-1:0));  % Reuse
+
+  for y_tile = 1:vert_tile
+    for x_tile = 1:hor_tile
+      H = (y_tile - 1) * 8 + 1;
+      L = (x_tile - 1) * 8 + 1;
+      block = a(H:H+7, L:L+7);
+
+      for i = 1:8
+        row = block(i, :);
+
+        V1 = uint8((~isempty(Lgray) & (row == Lgray)) | (row == Black));
+        V2 = uint8((~isempty(Dgray) & (row == Dgray)) | (row == Black));
+
+        DATA(data_index)     = sum(V1 .* pow2);
+        DATA(data_index + 1) = sum(V2 .* pow2);
+        data_index = data_index + 2;
+      end
     end
-
-    if rem(width,160)==0 && rem(height,144)==0
-      disp([currentfilename, ' is an upscaled image with borders, downscaling and extracting...'])
-      a=imresize(a,160/width,'nearest');
-      a=a(17:17+111,17:17+127);
-      image_OK=1;
-    end
   end
+end
 
-  C=unique(a);
-  if length(C)==1 || length(C)>4
-    image_OK=0;
-  end
-
-  if  image_OK==1
-    [height, width, layers]=size(a);
-    C=unique(a);
-
-    switch length(C)
-      case 4;%4 colors, OK
-        Black=C(1);
-        Dgray=C(2);
-        Lgray=C(3);
-        White=C(4);
-      case 3;%3 colors, sacrify LG (not well printed)
-        Black=C(1);
-        Dgray=C(2);
-        Lgray=[];
-        White=C(3);
-      case 2;%2 colors, sacrify LG and DG
-        Black=C(1)
-        Dgray=[];
-        Lgray=[];
-        White=C(2);
-      end
-
-      hor_tile=width/8;
-      vert_tile=height/8;
-      tile=0;
-      H=1;
-      L=1;
-      H_tile=1;
-      L_tile=1;
-      DATA=[];
-      y_graph=0;
-      total_tiles=hor_tile*vert_tile;
-      for x=1:1:hor_tile
-        for y=1:1:vert_tile
-          tile=tile+1;
-          b=a((H:H+7),(L:L+7));
-          for i = 1:8
-            V1 = repmat('0', 1, 8);  % Initialize binary string V1
-            V2 = repmat('0', 1, 8);  % Initialize binary string V2
-            for j = 1:8
-              if b(i,j) == Lgray
-                V1(j) = '1'; V2(j) = '0';
-              elseif b(i,j) == Dgray
-                V1(j) = '0'; V2(j) = '1';
-              elseif b(i,j) == White
-                V1(j) = '0'; V2(j) = '0';
-              elseif b(i,j) == Black
-                V1(j) = '1'; V2(j) = '1';
-              end
-            end
-            DATA = [DATA, bin2dec(V1), bin2dec(V2)];
-          end
-        end
-        L=L+8;
-        L_tile=L_tile+1;
-        if L>=width
-          L=1;
-          L_tile=1;
-          H=H+8;
-          H_tile=H_tile+1;
-        end
-      end
-    else
-      disp([currentfilename,' is rejected !'])
-      end

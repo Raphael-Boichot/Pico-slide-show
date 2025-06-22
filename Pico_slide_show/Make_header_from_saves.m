@@ -12,7 +12,7 @@ start_offset = 8193;        % Starting byte for first chunk
 block_spacing = 4096;       % Bytes between chunks
 
 % Collect save files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-listing = dir('./saves/*.sav*');
+listing = dir('./Saves/*.sav*');
 num_files = length(listing);
 total_chunks = chunks_per_file * num_files;
 images = total_chunks;
@@ -60,7 +60,7 @@ for i = 1:num_files
     filename = ['./Images/', imagefiles(i).name];
     [image_OK,DATA]=image_converter(filename);
     if image_OK==1
-    binary_data = [binary_data,DATA];
+    binary_data = [binary_data;DATA'];
     images=images+1;
     end
 end
