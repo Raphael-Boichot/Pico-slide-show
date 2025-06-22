@@ -15,7 +15,7 @@ unsigned char palette_index = 0;
 unsigned char palette_number = 4;
 unsigned short int palette_storage[] = {
   //beware, palette is inverted compared to normal display in the Game Boy Format
-  0xFFFF, 0x94B2, 0x31A6, 0x0000,  //default grayscale
+  0xFFFF, 0xBDB7, 0x52AA, 0x0000,  //default grayscale
   0xFFFF, 0x6FE5, 0x1BBA, 0x0000,  //GBC
   0xACE1, 0x54A5, 0x2347, 0x11E5,  //DMG
   0xC614, 0x8C8D, 0x4A87, 0x1082   //GBP
