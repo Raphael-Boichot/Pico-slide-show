@@ -6,7 +6,6 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
 
 - Install the last [Arduino IDE](https://www.arduino.cc/en/software)
 - Install the [Earle F. Philhower Raspberry Pi Pico Arduino core for Arduino IDE](https://github.com/earlephilhower/arduino-pico) via the Arduino Board manager (see [installation guide](https://github.com/earlephilhower/arduino-pico#installing-via-arduino-boards-manager)).
-- Install the the [Adafruit Neopixel for Arduino IDE](https://github.com/adafruit/Adafruit_NeoPixel) from the library manager;
 - Install the Bodmer [TFT_eSPI library](https://github.com/Bodmer/TFT_eSPI) via the Arduino library manager;
 - Locate the TFT_eSPI library: **\Arduino\libraries\TFT_eSPI** folder in your Arduino libraries and copy the [configuration file](/Pico_slide_show/TFT_setup) for the TFT display in this folder.
 - Edit the **User_Setup_Select.h** and modify line 29:
@@ -15,7 +14,7 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
 
 ## User manual
 
-- Drop Game Boy Camera saves into the **/saves** folder. You can drop and show as much as 18 saves in a row;
+- Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images in the **/Images** folder . You can drop and show as much as 18 saves in a row;
 - Run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves to C compatible data. You can set the delay between images from this script;
 - Open **Pico_slide_show.ino** with the Arduino IDE;
 - Compile your code with the RP2040 core (select the Raspberry Pi Pico board) and upload or drop the pre-compiled .uf2 to you board.
