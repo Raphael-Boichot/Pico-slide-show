@@ -74,7 +74,7 @@ fwrite(fid, binary_data, 'uint8');
 fclose(fid);
 
 % === Generate Preview Image ===
-if length(binary_data)==0;
+if not(length(binary_data)==0);
 disp('Generating an image file for checking');
 data_viewer(binary_data, 'preview.png');
 end
