@@ -60,34 +60,34 @@ void dump_image_to_display(int image_random) {
   offset_x = 0;
 
   for (int tile_line = 0; tile_line < max_tile_line; tile_line++) {
-    IMAGE_bytes_counter = 16 * max_tile_column * tile_line;
+    int tile_row_start = 16 * max_tile_column * tile_line;
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {  // each pixel row in tile
       offset_x = pixel_line * image_width;
 
       for (int tile_column = 0; tile_column < max_tile_column; tile_column++) {
-        uint8_t local_byte_LSB = tile_DATA_buffer[IMAGE_bytes_counter];
-        uint8_t local_byte_MSB = tile_DATA_buffer[IMAGE_bytes_counter + 1];
+        uint8_t local_byte_LSB = tile_DATA_buffer[tile_row_start + 16 * tile_column + 2 * i];
+        uint8_t local_byte_MSB = tile_DATA_buffer[tile_row_start + 16 * tile_column + 2 * i + 1];
+
+        uint8_t byte_lsb = local_byte_LSB;
+        uint8_t byte_msb = local_byte_MSB;
 
         for (int posx = 0; posx < 8; posx++) {
-          uint8_t mask = 1 << (7 - posx);  // Create mask to isolate bit
-          uint8_t bit_lsb = (local_byte_LSB & mask) ? 1 : 0;
-          uint8_t bit_msb = (local_byte_MSB & mask) ? 1 : 0;
-          pixel_DATA_buffer[offset_x + posx] = (bit_msb << 1) | bit_lsb;//storing pixel level 0(white)..3(dark)
+          pixel_DATA_buffer[offset_x + posx] = ((byte_msb & 0x80) >> 6) | ((byte_lsb & 0x80) >> 7);
+          byte_msb <<= 1;
+          byte_lsb <<= 1;
         }
 
-        IMAGE_bytes_counter += 16;  // Next tile in row
         offset_x += 8;
       }
-
-      IMAGE_bytes_counter = IMAGE_bytes_counter - 16 * max_tile_column + 2;  // Next row in tiles
       pixel_line++;
     }
   }
 
-  for (int x = 0; x < image_width; x++) {
-    for (int y = 0; y < image_height; y++) {
-      img.drawPixel(x, y, lookup_TFT_RGB565[pixel_DATA_buffer[x + y * image_width]]);
+  for (int y = 0; y < image_height; y++) {
+    int row_offset = y * image_width;
+    for (int x = 0; x < image_width; x++) {
+      img.drawPixel(x, y, lookup_TFT_RGB565[pixel_DATA_buffer[row_offset + x]]);
     }
   }
   img.pushSprite(0, y_ori);  //dump image to display
