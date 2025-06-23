@@ -1,6 +1,6 @@
 # Flex with your Game Boy Camera images
 
-This project is a simple foundation for a tiny digital frame that displays Game Boy Camera images—because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, and powered by a single CR2032 lithium battery, thoughtfully contributing to e-waste and planetary decline, one utterly unnecessary gadget at a time.
+This project is a simple foundation for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, and powered by a single CR2032 lithium battery, thoughtfully contributing to e-waste and planetary decline, one utterly unnecessary gadget at a time.
 
 ## Environment configuration
 
@@ -43,4 +43,4 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 ## Kind warning
 
-The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup—feel free to create your own; the license permits it!
+The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup - feel free to create your own; the license permits it!
