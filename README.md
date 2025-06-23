@@ -12,6 +12,10 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
     **#include <Pico_slide_show_TFT_eSPI_setup.h> // Default setup is root library folder**
 - Install [GNU Octave](https://www.octave.org/). It is a multi-OS computing langage requiring no dependancies used to convert save files.
 
+## Dev note
+
+The Arduino IDE does not allow directly scripting the two tasks (image converter and compiler) easily like other dev platforms. It's possible but more complicated than just running separately GNU Octave and Arduino IDE. If this is a problem for your, please read the **Kind Warnings** section.
+
 ## Image conversion and compiling
 
 - Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images in the **/Images** folder. You can drop and show as much as 540 images in a build (up to 540 images they will be discarded automatically);
