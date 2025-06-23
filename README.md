@@ -16,6 +16,8 @@ This project is a simple base for a tiny digital frame showing Game Boy Camera i
 
 The Arduino IDE does not allow directly scripting the two tasks (image converter and compiler) easily like other dev platforms. It's possible but more complicated than just running GNU Octave and the compiler separately.
 
+So, this is how to proceed:
+
 - Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images into the **/Images** folder. You can drop and show as many as 540 images in a build (up to 540 images, extras will be discarded).
 - Run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves and images to C-compatible data. You can also set the delay between images from this script;
 - Open **Pico_slide_show.ino** with the Arduino IDE;
