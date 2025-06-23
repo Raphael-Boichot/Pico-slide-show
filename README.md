@@ -43,4 +43,4 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 ## Kind warning
 
-The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup—feel free to create your own; the license permits it! I bear no responsibility for the planetary impact of this utterly unnecessary yet absolutely essential project.
+The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup—feel free to create your own; the license permits it!
