@@ -36,11 +36,11 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 ## User Manual in 4 steps
 
-- Put a CR2032 battery and switch the power on.
-- Push the button to change the palette.
-- Flex in the city with your Pico Slide Show.
-- Regret using disposable lithium batteries for such a futile purpose.
+- Insert a CR2032 battery and power it on.
+- Press the button to cycle through palettes.
+- Strut through the city, proudly showing off your Pico Slide Show.
+- Question your life choices as you ponder the environmental cost of single-use lithium batteries—for this beautifully pointless creation.
 
 ## Kind warning
 
-The code and current design come as is. If you're not happy with the current hardware, the PCB EasyEDA design, GNU Octave scripting, or the Arduino IDE, create your own—the license allows it!
+The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup—feel free to create your own; the license permits it! I bear no responsibility for the planetary impact of this utterly unnecessary yet absolutely essential project.
