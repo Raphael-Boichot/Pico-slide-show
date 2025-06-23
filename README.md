@@ -21,7 +21,7 @@ So, this is how to proceed:
 - Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images into the **/Images** folder. You can drop and show as many as 540 images in a build (up to 540 images, extras will be discarded).
 - Run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves and images to C-compatible data. You can also set the delay between images from this script;
 - Open **Pico_slide_show.ino** with the Arduino IDE;
-- Compile your code with the RP2040 core (select the Raspberry Pi Pico board and compile at 50 MHz) and upload or drop the pre-compiled .uf2 to your board.
+- Compile your code with the RP2040 core (select the Raspberry Pi Pico board and compile at 50 MHz) and upload directly or drop the pre-compiled .uf2 to your board.
 
 ## Parts needed to build the device
 
