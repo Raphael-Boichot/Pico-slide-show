@@ -32,14 +32,14 @@ So, this is how to proceed:
 - 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
 - A [CR2032 battery holder](https://aliexpress.com/item/1005006357635710.html) to solder. The battery should last about 5 hours of continuous display.
 
-PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs.
+PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. CR2032 lithium batteries have a theoretical capacity of 210 mAh at 3V, the device consumes less than 10 mA at 5V, the voltage converter has it's own efficiency, so you can probably rely on a single battery for a bit less than two hours.
 
 ## User Manual in 4 steps
 
 - Put a CR2032 battery and switch the power on.
 - Push the button to change the palette.
 - Flex in the city with your Pico Slide Show.
-- Regret using disposable lithium batteries for such a futile use.
+- Regret using disposable lithium batteries for such a futile purpose.
 
 ## Kind warning
 
