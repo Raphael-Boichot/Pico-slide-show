@@ -47,8 +47,8 @@ void setup(void) {
   gpio_put(TFT_BL, 1);
   seed_rng_from_adc();  // Get entropy from ADC
 
-  image_random = random(images);
   load_palette(palette_index);
+  pick_new_image();
   dump_image_to_display(image_random);
 }  // setup()
 
@@ -68,7 +68,7 @@ void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, novem
   currentMillis = millis();
   if (currentMillis - previousMillis >= slide_show_delay) {
     previousMillis = currentMillis;
-    image_random = random(images);
+    pick_new_image();
     dump_image_to_display(image_random);
   }
 }
@@ -139,4 +139,16 @@ void seed_rng_from_adc() {
     sleep_ms(1);               // Small delay to allow entropy change
   }
   srand(seed);
+}
+
+void pick_new_image() {
+  static int last_image = -1;  // First time: no last image
+  int new_image;
+
+  do {
+    new_image = random(images);
+  } while (new_image == last_image);
+
+  image_random = new_image;
+  last_image = new_image;
 }
