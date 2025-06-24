@@ -9,10 +9,34 @@ TFT_eSprite img = TFT_eSprite(&tft);  // Create Sprite object "img" with pointer
 void setup(void) {
   //Set up the display
   tft.init();
-  tft.setTextSize(2);
+  tft.setTextSize(1);
   img.setColorDepth(BITS_PER_PIXEL);  // Set colour depth first
   tft.setRotation(3);
   tft.fillScreen(TFT_BLACK);
+  tft.setTextColor(TFT_GREEN);
+  tft.setCursor(0, 8 + TXT_SHIFT);
+  tft.println("Pico Slide show");
+  tft.setTextColor(TFT_OLIVE);
+  tft.setCursor(0, 16 + TXT_SHIFT);
+  tft.println("Raphael BOICHOT-2025");
+  tft.setTextColor(TFT_SKYBLUE);
+  tft.setCursor(0, 24 + TXT_SHIFT);
+  tft.println("GPL-3.0 license");
+  tft.setTextColor(TFT_CYAN);
+  tft.setCursor(0, 32 + TXT_SHIFT);
+  tft.println("https://github.com/");
+  tft.setCursor(0, 40 + TXT_SHIFT);
+  tft.println("Raphael-Boichot/");
+  tft.setCursor(0, 48 + TXT_SHIFT);
+  tft.println("Pico-slide-show");
+  tft.setTextColor(TFT_VIOLET);
+  tft.setCursor(0, 56 + TXT_SHIFT);
+  tft.println("Version 1.0");
+  tft.setTextColor(TFT_ORANGE);
+  tft.setCursor(0, 64 + TXT_SHIFT);
+  tft.println("Enjoy the device !");
+  delay(2500);
+
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
   //Serial.begin(115200);
   gpio_init(BTN_PUSH);  // Configure BTN_PUSH as input

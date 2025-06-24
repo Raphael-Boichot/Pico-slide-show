@@ -5,6 +5,7 @@
 #define LED_STATUS_PIN 16  // Internal LED is 16 on the RP2040zero
 #define NUMPIXELS 1        // NeoPixel ring size (just internal LED here)
 #define BITS_PER_PIXEL 16
+#define TXT_SHIFT 24
 #define image_width 128
 #define image_height 112
 #define tile_packet_size 16 * (image_width * image_height) / 64
