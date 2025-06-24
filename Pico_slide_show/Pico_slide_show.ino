@@ -22,6 +22,7 @@ void setup(void) {
   gpio_put(TFT_BL, 1);
   image_random = random(images);
   load_palette(palette_index);
+  dump_image_to_display(image_random);
 }  // setup()
 
 /////////////Specific to TinyGB Printer//////////////
