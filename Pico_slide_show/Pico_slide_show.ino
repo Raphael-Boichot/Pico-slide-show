@@ -3,6 +3,7 @@
 #include <TFT_eSPI.h>  // Hardware-specific library
 #include <SPI.h>
 #include <hardware/gpio.h>
+#include <hardware/adc.h>
 TFT_eSPI tft = TFT_eSPI();            // Invoke custom library
 TFT_eSprite img = TFT_eSprite(&tft);  // Create Sprite object "img" with pointer to "tft" object
 
@@ -44,6 +45,8 @@ void setup(void) {
   gpio_init(TFT_BL);  // configure BL as output, allows deactivating it via software in the future
   gpio_set_dir(TFT_BL, GPIO_OUT);
   gpio_put(TFT_BL, 1);
+  seed_rng_from_adc();  // Get entropy from ADC
+
   image_random = random(images);
   load_palette(palette_index);
   dump_image_to_display(image_random);
@@ -122,4 +125,18 @@ void load_palette(int indice) {
   for (int i = 0; i < 4; i++) {  //load palette
     lookup_TFT_RGB565[i] = palette_storage[i + indice * 4];
   }
+}
+
+void seed_rng_from_adc() {
+  adc_init();
+  adc_gpio_init(26);  // GPIO26 is ADC0; make sure nothing is connected
+  adc_select_input(0);
+
+  uint32_t seed = 0;
+  for (int i = 0; i < 32; i++) {
+    seed <<= 1;
+    seed |= (adc_read() & 1);  // Use the least significant bit
+    sleep_ms(1);               // Small delay to allow entropy change
+  }
+  srand(seed);
 }

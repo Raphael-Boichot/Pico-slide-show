@@ -39,4 +39,4 @@ unsigned int max_tile_column = 0;      //local variable for decoder
 unsigned int max_pixel_line = 0;       //local variable for decoder
 unsigned long currentMillis = 0;
 unsigned long previousMillis = 0;
-const unsigned long debounceDelay = 200;  // 200 ms debounce time
+const unsigned long debounceDelay = 500;  // 200 ms debounce time
