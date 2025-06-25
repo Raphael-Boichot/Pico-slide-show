@@ -26,6 +26,7 @@ So, this is how to proceed:
 ## Parts needed to build the device
 
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
+
 ![](/PCB/PCB.png)
 
 - A [0.85 inch 128x128 TFT display](https://aliexpress.com/item/1005008822385316.html). It must be that exact same one (ST7735 controller).
