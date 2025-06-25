@@ -1,4 +1,5 @@
 //Offset for the 240*240 ST7789 display
+#define DEBUG_MODE
 #define y_ori 8
 #define TFT_BL 7
 #define BTN_PUSH 13        // 8 in real, 13 just for testing with another board
@@ -6,6 +7,7 @@
 #define NUMPIXELS 1        // NeoPixel ring size (just internal LED here)
 #define BITS_PER_PIXEL 16
 #define TXT_SHIFT 24
+#define Animation_delay 250
 #define image_width 128
 #define image_height 112
 #define tile_packet_size 16 * (image_width * image_height) / 64
