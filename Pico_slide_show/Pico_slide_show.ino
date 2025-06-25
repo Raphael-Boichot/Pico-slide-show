@@ -14,50 +14,9 @@ void setup(void) {
   img.setColorDepth(BITS_PER_PIXEL);  // Set colour depth first
   tft.setRotation(3);
   tft.fillScreen(TFT_BLACK);
-  tft.setTextColor(TFT_GREEN);
-  tft.setCursor(0, 0 + TXT_SHIFT);
-  tft.print("Booting");
-  delay(Animation_delay);
-  for (int counter = 0; counter < 6; counter++) {
-    tft.print(".");
-    delay(Animation_delay);
-  }
-  tft.println(".");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_GREEN);
-  tft.setCursor(0, 8 + TXT_SHIFT);
-  tft.println("Pico Slide show");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_OLIVE);
-  tft.setCursor(0, 16 + TXT_SHIFT);
-  tft.println("Raphael BOICHOT-2025");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_SKYBLUE);
-  tft.setCursor(0, 24 + TXT_SHIFT);
-  tft.println("GPL-3.0 license");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_CYAN);
-  tft.setCursor(0, 32 + TXT_SHIFT);
-  tft.println("https://github.com/");
-  tft.setCursor(0, 40 + TXT_SHIFT);
-  tft.println("Raphael-Boichot/");
-  tft.setCursor(0, 48 + TXT_SHIFT);
-  tft.println("Pico-slide-show");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_VIOLET);
-  tft.setCursor(0, 56 + TXT_SHIFT);
-  tft.println("Version 1.0");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_MAGENTA);
-  tft.setCursor(0, 64 + TXT_SHIFT);
-  tft.print(images, DEC);
-  tft.println(" stored into ROM");
-  delay(Animation_delay);
-  tft.setTextColor(TFT_ORANGE);
-  tft.setCursor(0, 72 + TXT_SHIFT);
-  tft.println("Enjoy the device !");
+  Booting_animation();
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
-  gpio_init(BTN_PUSH);  // Configure BTN_PUSH as input
+  gpio_init(BTN_PUSH);                          // Configure BTN_PUSH as input
   gpio_set_dir(BTN_PUSH, GPIO_IN);
   gpio_init(TFT_BL);  // configure BL as output, allows deactivating it via software in the future
   gpio_set_dir(TFT_BL, GPIO_OUT);
@@ -180,4 +139,49 @@ void pick_new_image() {
 
   image_random = new_image;
   last_image = new_image;
+}
+
+void Booting_animation() {
+  tft.setTextColor(TFT_YELLOW);
+  tft.setCursor(0, 0 + TXT_SHIFT);
+  tft.print("Booting");
+  delay(Animation_delay);
+  for (int counter = 0; counter < 6; counter++) {
+    tft.print(".");
+    delay(Animation_delay);
+  }
+  tft.println(".");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_GREEN);
+  tft.setCursor(0, 8 + TXT_SHIFT);
+  tft.println("Pico Slide show");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_OLIVE);
+  tft.setCursor(0, 16 + TXT_SHIFT);
+  tft.println("Raphael BOICHOT-2025");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_SKYBLUE);
+  tft.setCursor(0, 24 + TXT_SHIFT);
+  tft.println("GPL-3.0 license");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_CYAN);
+  tft.setCursor(0, 32 + TXT_SHIFT);
+  tft.println("https://github.com/");
+  tft.setCursor(0, 40 + TXT_SHIFT);
+  tft.println("Raphael-Boichot/");
+  tft.setCursor(0, 48 + TXT_SHIFT);
+  tft.println("Pico-slide-show");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_VIOLET);
+  tft.setCursor(0, 56 + TXT_SHIFT);
+  tft.println("Version 1.0");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_MAGENTA);
+  tft.setCursor(0, 64 + TXT_SHIFT);
+  tft.print(images, DEC);
+  tft.println(" stored into ROM");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_ORANGE);
+  tft.setCursor(0, 72 + TXT_SHIFT);
+  tft.println("Enjoy the device !");
 }
