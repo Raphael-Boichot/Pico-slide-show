@@ -75,8 +75,8 @@ fclose(fid);
 
 % === Generate Preview Image ===
 if not(length(binary_data)==0);
-disp('Generating an image file for checking');
-data_viewer(binary_data, 'preview.png');
+  disp('Generating an image file for checking');
+  data_viewer(binary_data, 'preview.png');
 end
 
 % === Limit maximum images to 540 ===
@@ -86,34 +86,40 @@ if images>maximum_file_number
   disp('Image are limited to 540, cutting file !');
 end
 
-% === Generate Arduino Header File ===
+tic
+% === Generate Arduino Header File (Optimized for Octave) ===
 disp('Generating header file for Arduino IDE');
 fid = fopen('graphical_data.h', 'w');
+
+% Write header info
 fprintf(fid, 'const unsigned int images = %d;\n', images);
 fprintf(fid, 'const unsigned int slide_show_delay = %d;\n\n', slide_show_delay_ms);
 fprintf(fid, 'const uint8_t graphical_DATA[] = {\n');
 
-% Format as hex table, 16 bytes per line
+% Loop and write bytes directly
 for i = 1:length(binary_data)
+  % Start a new line every 16 bytes
   if mod(i - 1, 16) == 0
     fprintf(fid, '  ');
   end
-  fprintf(fid, '0x%02X', binary_data(i));
-  if i < length(binary_data)
-    fprintf(fid, ',');
-  end
-  if mod(i, 16) == 0
-    fprintf(fid, '\n');
-  else
-    fprintf(fid, ' ');
-  end
-end
 
-if mod(length(binary_data), 16) ~= 0
-  fprintf(fid, '\n');
+  % Print byte
+  if i < length(binary_data)
+    fprintf(fid, '0x%02X, ', binary_data(i));
+  else
+    % Last byte — no comma
+    fprintf(fid, '0x%02X', binary_data(i));
+  end
+
+  % Newline after 16 bytes or at the end
+  if mod(i, 16) == 0 || i == length(binary_data)
+    fprintf(fid, '\n');
+  end
 end
 
 fprintf(fid, '};\n');
 fclose(fid);
-msgbox('Done !');
 disp('Done, you can compile the code !');
+toc
+beep()
+
