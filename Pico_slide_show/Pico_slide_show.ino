@@ -15,14 +15,27 @@ void setup(void) {
   tft.setRotation(3);
   tft.fillScreen(TFT_BLACK);
   tft.setTextColor(TFT_GREEN);
+  tft.setCursor(0, 0 + TXT_SHIFT);
+  tft.print("Booting");
+  delay(Animation_delay);
+  for (int counter = 0; counter < 6; counter++) {
+    tft.print(".");
+    delay(Animation_delay);
+  }
+  tft.println(".");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_GREEN);
   tft.setCursor(0, 8 + TXT_SHIFT);
   tft.println("Pico Slide show");
+  delay(Animation_delay);
   tft.setTextColor(TFT_OLIVE);
   tft.setCursor(0, 16 + TXT_SHIFT);
   tft.println("Raphael BOICHOT-2025");
+  delay(Animation_delay);
   tft.setTextColor(TFT_SKYBLUE);
   tft.setCursor(0, 24 + TXT_SHIFT);
   tft.println("GPL-3.0 license");
+  delay(Animation_delay);
   tft.setTextColor(TFT_CYAN);
   tft.setCursor(0, 32 + TXT_SHIFT);
   tft.println("https://github.com/");
@@ -30,26 +43,30 @@ void setup(void) {
   tft.println("Raphael-Boichot/");
   tft.setCursor(0, 48 + TXT_SHIFT);
   tft.println("Pico-slide-show");
+  delay(Animation_delay);
   tft.setTextColor(TFT_VIOLET);
   tft.setCursor(0, 56 + TXT_SHIFT);
   tft.println("Version 1.0");
-  tft.setTextColor(TFT_ORANGE);
+  delay(Animation_delay);
+  tft.setTextColor(TFT_MAGENTA);
   tft.setCursor(0, 64 + TXT_SHIFT);
+  tft.print(images, DEC);
+  tft.println(" stored into ROM");
+  delay(Animation_delay);
+  tft.setTextColor(TFT_ORANGE);
+  tft.setCursor(0, 72 + TXT_SHIFT);
   tft.println("Enjoy the device !");
-  delay(2500);
-
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
-  //Serial.begin(115200);
   gpio_init(BTN_PUSH);  // Configure BTN_PUSH as input
   gpio_set_dir(BTN_PUSH, GPIO_IN);
   gpio_init(TFT_BL);  // configure BL as output, allows deactivating it via software in the future
   gpio_set_dir(TFT_BL, GPIO_OUT);
   gpio_put(TFT_BL, 1);
   seed_rng_from_adc();  // Get entropy from ADC
-
   load_palette(palette_index);
-  pick_new_image();
-  dump_image_to_display(image_random);
+  delay(2000);
+  //pick_new_image();
+  //dump_image_to_display(image_random);
 }  // setup()
 
 /////////////Specific to TinyGB Printer//////////////
@@ -74,7 +91,7 @@ void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, novem
 }
 
 void dump_image_to_display(int image_random) {
-  //Serial.println(image_random,DEC);
+
   graphical_DATA_offset = image_random * tile_packet_size;  //starting offset to get tile data
   for (int i = 0; i < tile_packet_size; i++) {
     tile_DATA_buffer[i] = graphical_DATA[i + graphical_DATA_offset];
@@ -118,6 +135,18 @@ void dump_image_to_display(int image_random) {
       img.drawPixel(x, y, lookup_TFT_RGB565[pixel_DATA_buffer[row_offset + x]]);
     }
   }
+
+#ifdef DEBUG_MODE
+  tft.fillScreen(TFT_BLACK);
+  tft.setTextColor(TFT_GREEN);
+  tft.setCursor(0, 0);
+  tft.print("Image rank: ");
+  tft.println(image_random, DEC);
+  tft.setCursor(0, 120);
+  tft.print("Image address: ");
+  tft.println(graphical_DATA_offset, HEX);
+#endif
+
   img.pushSprite(0, y_ori);  //dump image to display
 }
 
