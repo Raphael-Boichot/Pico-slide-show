@@ -156,7 +156,7 @@ void Booting_animation() {
   tft.setCursor(0, 8 + TXT_SHIFT);
   tft.println("Pico Slide show");
   delay(Animation_delay);
-  tft.setTextColor(TFT_OLIVE);
+  tft.setTextColor(TFT_WHITE);
   tft.setCursor(0, 16 + TXT_SHIFT);
   tft.println("Raphael BOICHOT-2025");
   delay(Animation_delay);
