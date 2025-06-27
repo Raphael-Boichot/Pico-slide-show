@@ -5,7 +5,7 @@ clc;
 clear;
 
 % Parameters
-slide_show_delay_ms = 10000;
+slide_show_delay_ms = 2000;
 chunk_size = 3584;          % 3584 bytes per image
 chunks_per_file = 30;       % 30 images per .sav file
 start_offset = 8193;        % Starting byte for first chunk
