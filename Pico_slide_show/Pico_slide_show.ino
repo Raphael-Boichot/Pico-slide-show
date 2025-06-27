@@ -100,7 +100,9 @@ void dump_image_to_display(int image_random) {
   tft.setTextColor(TFT_GREEN);
   tft.setCursor(0, 0);
   tft.print("Image rank: ");
-  tft.println(image_random, DEC);
+  tft.print(image_random, DEC);
+  tft.print("/");
+  tft.println(images, DEC);
   tft.setCursor(0, 120);
   tft.print("Image address: ");
   tft.println(graphical_DATA_offset, HEX);
