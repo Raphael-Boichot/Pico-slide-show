@@ -1,5 +1,5 @@
 //Offset for the 240*240 ST7789 display
-//#define DEBUG_MODE
+#define DEBUG_MODE
 #define y_ori 8
 #define TFT_BL 7
 #define BTN_PUSH 13        // 8 in real, 13 just for testing with another board
@@ -43,3 +43,4 @@ unsigned int max_pixel_line = 0;       //local variable for decoder
 unsigned long currentMillis = 0;
 unsigned long previousMillis = 0;
 const unsigned long debounceDelay = 500;  // 200 ms debounce time
+bool first_image = 1;

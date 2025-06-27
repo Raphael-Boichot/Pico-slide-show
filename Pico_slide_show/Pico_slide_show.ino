@@ -14,24 +14,32 @@ void setup(void) {
   img.setColorDepth(BITS_PER_PIXEL);  // Set colour depth first
   tft.setRotation(3);
   tft.fillScreen(TFT_BLACK);
-  Booting_animation();
-  img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
-  gpio_init(BTN_PUSH);                          // Configure BTN_PUSH as input
+  delay(100);           //suppresses display jittering at init
+  gpio_init(BTN_PUSH);  // Configure BTN_PUSH as input
   gpio_set_dir(BTN_PUSH, GPIO_IN);
   gpio_init(TFT_BL);  // configure BL as output, allows deactivating it via software in the future
   gpio_set_dir(TFT_BL, GPIO_OUT);
-  gpio_put(TFT_BL, 1);
-  seed_rng_from_adc();  // Get entropy from ADC
-  load_palette(palette_index);
-  delay(2000);
-  //pick_new_image();
-  //dump_image_to_display(image_random);
+  gpio_put(TFT_BL, 1);                          //BL siwtches the display ON, do not forget it !
+  Booting_animation();                          //it's not an animation anymore
+  img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
+  seed_rng_from_adc();                          // Get entropy from ADC
 }  // setup()
 
 /////////////Specific to TinyGB Printer//////////////
 
 void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, november 2024
 {
+
+  currentMillis = millis();
+
+  if (first_image) {  //dumps rapidely the first image
+    load_palette(palette_index);
+    pick_new_image();
+    dump_image_to_display(image_random);
+    first_image = 0;
+    previousMillis = currentMillis;
+  }
+
   if (gpio_get(BTN_PUSH)) {
     palette_index++;
     if (palette_index >= palette_number) {
@@ -41,7 +49,7 @@ void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, novem
     dump_image_to_display(image_random);
     delay(debounceDelay);
   }
-  currentMillis = millis();
+
   if (currentMillis - previousMillis >= slide_show_delay) {
     previousMillis = currentMillis;
     pick_new_image();
@@ -143,31 +151,63 @@ void pick_new_image() {
   last_image = new_image;
 }
 
+void typewriterPrintWithCursor(const char* text, uint16_t x, uint16_t y, uint16_t color, uint16_t delayMs = 40) {
+  tft.setCursor(x, y);
+  tft.setTextColor(color);
+
+  for (int i = 0; text[i] != '\0'; i++) {
+    tft.print(text[i]);
+
+    // Draw white cursor
+    int cx = tft.getCursorX();
+    int cy = tft.getCursorY();
+    tft.fillRect(cx, cy, 6, 8, TFT_WHITE);  // cursor block
+    delay(delayMs);
+
+    // Erase cursor
+    tft.fillRect(cx, cy, 6, 8, TFT_BLACK);
+  }
+}
+
 void Booting_animation() {
-  tft.setTextColor(TFT_GREEN);
-  tft.setCursor(0, 8 + TXT_SHIFT);
-  tft.println("Pico Slide show");
-  tft.setTextColor(TFT_WHITE);
-  tft.setCursor(0, 16 + TXT_SHIFT);
-  tft.println("Raphael BOICHOT-2025");
-  tft.setTextColor(TFT_SKYBLUE);
-  tft.setCursor(0, 24 + TXT_SHIFT);
-  tft.println("GPL-3.0 license");
-  tft.setTextColor(TFT_CYAN);
-  tft.setCursor(0, 32 + TXT_SHIFT);
-  tft.println("https://github.com/");
-  tft.setCursor(0, 40 + TXT_SHIFT);
-  tft.println("Raphael-Boichot/");
-  tft.setCursor(0, 48 + TXT_SHIFT);
-  tft.println("Pico-slide-show");
-  tft.setTextColor(TFT_VIOLET);
-  tft.setCursor(0, 56 + TXT_SHIFT);
-  tft.println("Version 1.0");
-  tft.setTextColor(TFT_MAGENTA);
-  tft.setCursor(0, 64 + TXT_SHIFT);
-  tft.print(images, DEC);
-  tft.println(" stored into ROM");
-  tft.setTextColor(TFT_ORANGE);
-  tft.setCursor(0, 72 + TXT_SHIFT);
-  tft.println("Enjoy the device !");
+  tft.fillScreen(TFT_BLACK);  // Clear the screen
+  delay(300);                 // Small boot delay
+
+  int y = 8 + TXT_SHIFT;
+
+  // Lines of splash screen
+  struct Line {
+    const char* text;
+    uint16_t color;
+  } lines[] = {
+    { "Pico Slide show", TFT_GREEN },
+    { "Raphael BOICHOT-2025", TFT_WHITE },
+    { "GPL-3.0 license", TFT_SKYBLUE },
+    { "https://github.com/", TFT_CYAN },
+    { "Raphael-Boichot/", TFT_CYAN },
+    { "Pico-slide-show", TFT_CYAN },
+    { "Version 1.0", TFT_VIOLET },
+    { nullptr, TFT_MAGENTA },  // Dynamic image count
+    { "Enjoy the device !", TFT_ORANGE },
+  };
+
+  for (int i = 0; i < sizeof(lines) / sizeof(lines[0]); ++i) {
+    if (lines[i].text) {
+      typewriterPrintWithCursor(lines[i].text, 0, y, lines[i].color);
+    } else {
+      char buffer[32];
+      sprintf(buffer, "%d stored into ROM", images);
+      typewriterPrintWithCursor(buffer, 0, y, lines[i].color);
+    }
+    y += 10;
+    delay(100);
+  }
+
+  // Final flashing cursor at the end
+  int fx = 0;
+  int fy = y;
+  for (int i = 0; i < 6; i++) {
+    tft.fillRect(fx, fy, 6, 8, (i % 2 == 0) ? TFT_WHITE : TFT_BLACK);
+    delay(300);
+  }
 }
