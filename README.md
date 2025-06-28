@@ -28,6 +28,8 @@ So, this is how to proceed:
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
 - A [0.85 inch 128x128 TFT display](https://aliexpress.com/item/1005008822385316.html). It must be that exact same one (ST7735 controller).
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
+- [A 5V DC-DC step-up converter](https://www.aliexpress.com/item/32809095271.html), 0.9-5V (input) to 5V (output). If you want the blue fullset, here's another seller with a [blue PCB version](https://aliexpress.com/item/1005001640003575.html).
+- [Male pin headers](https://www.aliexpress.com/item/4000873858801.html) with 2.54 mm spacing, if necessary, whatever the pin lenght, you will trim them anyway.
 - A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height; it can be harvested from any dead electronics, so it is common.
 - 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
 - A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder (surface mount, no through-hole). Minimal recommended model is CR2032. There is enough clearance to solder bigger CR2XXX battery holder for longer use. CR2032 lithium batteries have a theoretical capacity of 220 mAh at 3V, the device consumes less than 10 mA at 5V, the voltage converter has it's own efficiency, so you can probably rely on a single battery for more than two hours.
