@@ -30,7 +30,7 @@ So, this is how to proceed:
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
 - A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height; it can be harvested from any dead electronics, so it is common.
 - 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
-- A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder. Minimal recommended model is CR2032 (2 hours of continuous use). CR2450 should last much longer.
+- A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder (surface mount, no through-hole). Minimal recommended model is CR2032 (2 hours of continuous use). There is enough clearance to solder bigger CR2XXX battery holder for longer use.
 
 ![](/PCB/Schematic.png)
 
