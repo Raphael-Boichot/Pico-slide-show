@@ -36,6 +36,12 @@ So, this is how to proceed:
 
 PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. CR2032 lithium batteries have a theoretical capacity of 210 mAh at 3V, the device consumes less than 10 mA at 5V, the voltage converter has it's own efficiency, so you can probably rely on a single battery for a bit less than two hours.
 
+## Assembly
+
+- I recommend testing the RP2040 Zero before soldering it (just try to flash the code without any error message) as Aliexpress components can sometimes be defective out of the box.
+- The battery holder is surface mount but on the the back side comprising pins of through hole components: the good way to assemble the board is to **cut the pins** of the front side components as short as possible **before** soldering so that the solder joints are as flat as possible on the back side. Trimming them after soldering is not enough and you risk to cut traces by trimming too short.
+- If possible, try to remove as much flux residues as you can but beware to the TFT display, it is very sensitive to dipping into IPA.
+
 ## User Manual in 4 steps
 
 - Insert a CR2032 battery and power it on.
