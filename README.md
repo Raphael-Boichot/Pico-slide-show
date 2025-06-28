@@ -53,8 +53,8 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 ## Dev notes
 
-- The RP2040 Zero (pinout is minimal) and the TFT display (pre-assembled) must be powered in 5 volts so the DC-DC converter, despite its debatable efficiency, is mandatory.
-- Using a rechargeable lithium battery would be cool but pre-assembled charge-discharge circuits are quite bulky and I wanted the board to be small. It is probably possible to create a much smaller and energy efficient custom PCB with SMD components only, feel free to do it !
+- The RP2040 Zero and the TFT display can be powered in 3.3V or 5V only (no VSYS pins available, this is a simplified board). I used a 5V DC/DC converter here just because I have some in stock and to keep hardware compatibility with some of my other projects requiring 5V. It can be replaced easily by a 3.3V DC/DC converter after a minor PCB re-routing.
+- Using a rechargeable lithium battery would be cool but pre-assembled charge-discharge circuits are too bulky for my own taste (I wanted the board to be light and small). It is probably possible to create a much smaller and energy efficient custom PCB with SMD components only, feel free to do it !
 
 ## Kind warning
 
