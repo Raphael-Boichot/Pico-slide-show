@@ -1,6 +1,6 @@
 # Flex with your Game Boy Camera images
 
-This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, easy to build, and powered by a single CR2XXX lithium battery.
+This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by a single CR2XXX lithium battery.
 
 ## Environment configuration
 
@@ -54,7 +54,7 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 ## Dev notes
 
 - The RP2040 Zero and the TFT display must be powered in 5 volts so the DC-DC converter is mandatory.
-- Using a rechargeable lithium battery here would be cool but pre-assembled charge-discharge circuits are quite bulky and I wanted the board to be small. It is probably possible to create a much smaller custom PCB with SMD components only, feel free to do it !
+- Using a rechargeable lithium battery would be cool but pre-assembled charge-discharge circuits are quite bulky and I wanted the board to be small. It is probably possible to create a much smaller and energy efficient custom PCB with SMD components only, feel free to do it !
 
 ## Kind warning
 
