@@ -1,8 +1,7 @@
 //Offset for the 240*240 ST7789 display
-#define DEBUG_MODE
 #define y_ori 8
 #define TFT_BL 7
-#define BTN_PUSH 13        // 8 in real, 13 just for testing with another board
+#define BTN_PUSH 8
 #define LED_STATUS_PIN 16  // Internal LED is 16 on the RP2040zero
 #define NUMPIXELS 1        // NeoPixel ring size (just internal LED here)
 #define BITS_PER_PIXEL 16
@@ -44,3 +43,4 @@ unsigned long currentMillis = 0;
 unsigned long previousMillis = 0;
 const unsigned long debounceDelay = 500;  // 200 ms debounce time
 bool first_image = 1;
+bool debug_mode = 0;

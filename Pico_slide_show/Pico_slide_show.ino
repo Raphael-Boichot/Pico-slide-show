@@ -19,7 +19,10 @@ void setup(void) {
   gpio_set_dir(BTN_PUSH, GPIO_IN);
   gpio_init(TFT_BL);  // configure BL as output, allows deactivating it via software in the future
   gpio_set_dir(TFT_BL, GPIO_OUT);
-  gpio_put(TFT_BL, 1);                          //BL siwtches the display ON, do not forget it !
+  gpio_put(TFT_BL, 1);  //BL switches the display ON, do not forget it !
+  if (gpio_get(BTN_PUSH)) {
+    debug_mode = 1;
+  }
   Booting_animation();                          //it's not an animation anymore
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
   seed_rng_from_adc();                          // Get entropy from ADC
@@ -103,21 +106,19 @@ void dump_image_to_display(int image_random) {
     }
   }
 
-#ifdef DEBUG_MODE
-  // Clear first text line (y = 0)
-  tft.fillRect(0, 0, 128, 8, TFT_BLACK);
-  // Clear second text line (y = 120)
-  tft.fillRect(0, 120, 128, 8, TFT_BLACK);
-  tft.setTextColor(TFT_GREEN);
-  tft.setCursor(0, 0);
-  tft.print("Image rank: ");
-  tft.print(image_random, DEC);
-  tft.print("/");
-  tft.println(images, DEC);
-  tft.setCursor(0, 120);
-  tft.print("Image address: ");
-  tft.println(graphical_DATA_offset, HEX);
-#endif
+  if (debug_mode) {
+    tft.fillRect(0, 0, 128, 8, TFT_BLACK);
+    tft.fillRect(0, 120, 128, 8, TFT_BLACK);
+    tft.setTextColor(TFT_GREEN);
+    tft.setCursor(0, 0);
+    tft.print("Image rank: ");
+    tft.print(image_random, DEC);
+    tft.print("/");
+    tft.println(images, DEC);
+    tft.setCursor(0, 120);
+    tft.print("Image address: ");
+    tft.println(graphical_DATA_offset, HEX);
+  }
 
   img.pushSprite(0, y_ori);  //dump image to display
 }
@@ -173,9 +174,6 @@ void typewriterPrintWithCursor(const char* text, uint16_t x, uint16_t y, uint16_
 }
 
 void Booting_animation() {
-  tft.fillScreen(TFT_BLACK);  // Clear the screen
-  delay(300);                 // Small boot delay
-
   int y = 8 + TXT_SHIFT;
 
   // Lines of splash screen
