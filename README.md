@@ -51,6 +51,11 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 - Strut through the city, proudly showing off your Pico Slide Show.
 - Question your life choices as you ponder the environmental cost of single-use lithium batteries—for this beautifully pointless creation.
 
+## Dev notes
+
+- The RP2040 Zero and the TFT display must be powered in 5 volts so the DC-DC converter is mandatory.
+- Using a rechargeable lithium battery here would be cool but pre-assembled charge-discharge circuits are quite bulky and I wanted the board to be small. It is probably possible to create a much smaller custom PCB with SMD components only, feel free to do it !
+
 ## Kind warning
 
 The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup - feel free to create your own; the license permits it!
