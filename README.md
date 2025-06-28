@@ -1,6 +1,6 @@
 # Flex with your Game Boy Camera images
 
-This project is a simple foundation for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, and powered by a single CR2XXX lithium battery.
+This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, easy to build, and powered by a single CR2XXX lithium battery.
 
 ## Environment configuration
 
