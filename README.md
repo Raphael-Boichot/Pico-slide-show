@@ -30,11 +30,11 @@ So, this is how to proceed:
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
 - A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height; it can be harvested from any dead electronics, so it is common.
 - 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
-- A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder (surface mount, no through-hole). Minimal recommended model is CR2032 (2 hours of continuous use). There is enough clearance to solder bigger CR2XXX battery holder for longer use.
+- A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder (surface mount, no through-hole). Minimal recommended model is CR2032. There is enough clearance to solder bigger CR2XXX battery holder for longer use. CR2032 lithium batteries have a theoretical capacity of 220 mAh at 3V, the device consumes less than 10 mA at 5V, the voltage converter has it's own efficiency, so you can probably rely on a single battery for more than two hours.
 
 ![](/PCB/Schematic.png)
 
-PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. CR2032 lithium batteries have a theoretical capacity of 210 mAh at 3V, the device consumes less than 10 mA at 5V, the voltage converter has it's own efficiency, so you can probably rely on a single battery for a bit less than two hours.
+PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. 
 
 ## Assembly (read carefully before attempting anything)
 
