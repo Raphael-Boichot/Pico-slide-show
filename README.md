@@ -1,6 +1,6 @@
 # Flex with your Game Boy Camera images
 
-This project is a simple foundation for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, and powered by a single CR2032 lithium battery.
+This project is a simple foundation for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the ’90s? It’s compact, portable, and powered by a single CR2XXX lithium battery.
 
 ## Environment configuration
 
@@ -30,7 +30,7 @@ So, this is how to proceed:
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
 - A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height; it can be harvested from any dead electronics, so it is common.
 - 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
-- A [CR2032 battery holder](https://aliexpress.com/item/1005006357635710.html) to solder. The battery should last about 5 hours of continuous display.
+- A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder. Minimal recommended model is CR2032 (2 hours of continuous use). CR2450 should last much longer.
 
 ![](/PCB/Schematic.png)
 
