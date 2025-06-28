@@ -45,7 +45,7 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 ## User Manual in 4 steps
 
 - Insert a CR2032 battery and power it on.
-- Press the button to cycle through palettes.
+- Press the button to cycle through palettes. Pressing it while booting activates a debug mode that shows minimal informations.
 - Strut through the city, proudly showing off your Pico Slide Show.
 - Question your life choices as you ponder the environmental cost of single-use lithium batteries—for this beautifully pointless creation.
 
