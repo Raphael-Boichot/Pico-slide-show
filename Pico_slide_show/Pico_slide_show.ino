@@ -104,7 +104,10 @@ void dump_image_to_display(int image_random) {
   }
 
 #ifdef DEBUG_MODE
-  tft.fillScreen(TFT_BLACK);
+  // Clear first text line (y = 0)
+  tft.fillRect(0, 0, 128, 8, TFT_BLACK);
+  // Clear second text line (y = 120)
+  tft.fillRect(0, 120, 128, 8, TFT_BLACK);
   tft.setTextColor(TFT_GREEN);
   tft.setCursor(0, 0);
   tft.print("Image rank: ");
