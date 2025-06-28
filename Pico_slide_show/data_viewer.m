@@ -64,6 +64,5 @@ function data_viewer(binary_data, name)
   imwrite(canvas, name);
 
   disp('Images arranged and written to PNG file');
-  disp('Done!');
 end
 

@@ -85,10 +85,11 @@ if images>maximum_file_number
   binary_data=binary_data(1:maximum_file_number*chunk_size);
   disp('Image are limited to 540, cutting file !');
 end
+disp([num2str(images), ' legit images have been detected and will be stored'])
 
 tic
 % === Generate Arduino Header File (Optimized for Octave) ===
-disp('Generating header file for Arduino IDE');
+disp('Generating header file for Arduino IDE, please wait...');
 fid = fopen('graphical_data.h', 'w');
 
 % Write header info
@@ -119,6 +120,7 @@ end
 
 fprintf(fid, '};\n');
 fclose(fid);
+
 disp('Done, you can compile the code !');
 toc
 beep()
