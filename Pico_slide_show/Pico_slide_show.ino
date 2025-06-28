@@ -155,7 +155,7 @@ void pick_new_image() {
   last_image = new_image;
 }
 
-void typewriterPrintWithCursor(const char* text, uint16_t x, uint16_t y, uint16_t color, uint16_t delayMs = 40) {
+void typewriterPrintWithCursor(const char* text, uint16_t x, uint16_t y, uint16_t color, uint16_t delayMs = 25) {
   tft.setCursor(x, y);
   tft.setTextColor(color);
 
