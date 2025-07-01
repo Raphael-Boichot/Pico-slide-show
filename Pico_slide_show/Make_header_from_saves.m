@@ -15,7 +15,7 @@ maximum_file_number = 540;  % limits data to about 2MB
 
 % Decomposing Photo! rom into individual save chunks %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp('Extracting saves from Photo! dump ROM');
-listing = [dir('./Roms/*.gbc*');dir('./Roms/*.gb*')];
+listing = [dir('./Roms/*.gbc');dir('./Roms/*.gb')];
 num_files = length(listing);
 
 for i = 1:num_files
@@ -33,7 +33,7 @@ for i = 1:num_files
   if error == 0
     disp(['Decomposing ROM file: ', filename]);
     for j = 1:7
-      starting_offset = chunk_rom_size * (j - 1) + 1;
+      starting_offset = chunk_rom_size * j + 1;
       ending_offset = starting_offset + chunk_rom_size - 1;
 
       % Make sure not to exceed the binary length
@@ -136,7 +136,14 @@ fprintf(fid, 'const unsigned int slide_show_delay = %d;\n\n', slide_show_delay_m
 fprintf(fid, 'const uint8_t graphical_DATA[] = {\n');
 
 % Loop and write bytes directly
+image_counter=0;
 for i = 1:length(binary_data)
+
+  if rem(i,16*16*14)==0
+  image_counter=image_counter+1;
+  disp(['Image ',num2str(image_counter),'/',num2str(images),' stored in graphical_data.h'])
+  end
+
   % Start a new line every 16 bytes
   if mod(i - 1, 16) == 0
     fprintf(fid, '  ');
