@@ -7,10 +7,52 @@ clear;
 % Parameters
 slide_show_delay_ms = 5000;
 chunk_size = 3584;          % 3584 bytes per image
+chunk_rom_size = 2^17;      % size of a save file
 chunks_per_file = 30;       % 30 images per .sav file
 start_offset = 8193;        % Starting byte for first chunk
 block_spacing = 4096;       % Bytes between chunks
 maximum_file_number = 540;  % limits data to about 2MB
+
+% Decomposing Photo! rom into individual save chunks %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+disp('Extracting saves from Photo! dump ROM');
+listing = [dir('./Roms/*.gbc*');dir('./Roms/*.gb*')];
+num_files = length(listing);
+
+for i = 1:num_files
+  error = 0;
+  filename = ['./Roms/', listing(i).name];
+  fid = fopen(filename, 'r');
+  binary = fread(fid, inf, 'uint8');
+  fclose(fid);
+
+  if length(binary) ~= 2^20  % Check for exactly 1 MB ROM size
+    warning('Bad dump, file skipped: %s', filename);
+    error = 1;
+  end
+
+  if error == 0
+    disp(['Decomposing ROM file: ', filename]);
+    for j = 1:7
+      starting_offset = chunk_rom_size * (j - 1) + 1;
+      ending_offset = starting_offset + chunk_rom_size - 1;
+
+      % Make sure not to exceed the binary length
+      if ending_offset > length(binary)
+        warning('Chunk exceeds ROM size. Skipping...');
+        continue;
+      end
+
+      % Use fileparts to safely strip extension
+      [~, name, ~] = fileparts(listing(i).name);
+      output_file = ['./Saves/', name,'_', num2str(j),'.sav'];
+      disp(['Saving: ', output_file]);
+
+      fid = fopen(output_file, 'w');
+      fwrite(fid, binary(starting_offset:ending_offset), 'uint8');
+      fclose(fid);
+    end
+  end
+end
 
 % Collect save files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 listing = dir('./Saves/*.sav*');
@@ -28,10 +70,6 @@ idx = 1;
 for i = 1:num_files
   filename = ['./saves/', listing(i).name];
   fid = fopen(filename, 'r');
-  if fid == -1
-    warning('Could not open file: %s', filename);
-    continue;
-  end
   binary = fread(fid, inf, 'uint8');
   fclose(fid);
 
