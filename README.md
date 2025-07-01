@@ -18,7 +18,7 @@ The Arduino IDE does not allow directly scripting the two tasks (image converter
 
 So, this is how to proceed:
 
-- Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images into the **/Images** folder. You can drop and show as many as 540 images in a single build (up to 540, extra images will be discarded with a warning). Any format coming from any known emulator existing on Earth is accepted as long as it is 4 colors (2bbp).
+- Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images into the **/Images** folder or rom dumps from [Photo!](https://github.com/untoxa/gb-photo) into the **/Roms** folder. You can drop and show as many as 540 images in a single build (up to 540, extra images will be discarded with a warning). Any format coming from any known emulator existing on Earth is accepted as long as it is 4 colors (2bbp).
 - Run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves and images to C-compatible data. You can also set the delay between images in ms from this script;
 - Open **Pico_slide_show.ino** with the Arduino IDE;
 - Compile your code with the RP2040 core (select the Raspberry Pi Pico board and compile at 50 MHz) and upload directly or drop the pre-compiled .uf2 to your board.
