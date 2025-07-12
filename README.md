@@ -26,35 +26,25 @@ So, this is how to proceed:
 ## Parts needed to build the device
 
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
-- A [0.85 inch 128x128 TFT display](https://aliexpress.com/item/1005008822385316.html). It must be that exact same one (ST7735 controller).
+- A [0.85 inch 128x128 TFT display](https://www.aliexpress.com/item/1005008822385316.html). It must be that exact same one (ST7735 controller).
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
-- [A 5V DC-DC step-up converter](https://www.aliexpress.com/item/32809095271.html), 0.9-5V (input) to 5V (output). If you want the blue fullset, here's another seller with a [blue PCB version](https://aliexpress.com/item/1005001640003575.html).
+- A [DD05CVSA charge-discharge circuit](https://www.aliexpress.com/item/1005005061314325.html).
 - [Male pin headers](https://www.aliexpress.com/item/4000873858801.html) with 2.54 mm spacing, if necessary, whatever the pin lenght, you will trim them anyway.
 - A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height; it can be harvested from any dead electronics, so it is common.
-- 1 [microswitch SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
-- A [CR2XXX battery holder](https://aliexpress.com/item/1005006357635710.html) to solder (surface mount, no through-hole). Minimal recommended model is CR2032. There is enough clearance to solder bigger CR2XXX battery holder for longer use. CR2032 lithium batteries have a theoretical capacity of 220 mAh at 3V, the device consumes less than 10 mA at 5V, the voltage converter has it's own efficiency, so you can probably rely on a single battery for more than two hours.
-
-![](/PCB/Schematic.png)
+- 2 [microswitches SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
+- A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html).
 
 PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. 
 
 ## Assembly (read carefully before attempting anything)
 
 - I recommend testing the RP2040 Zero before soldering it (just try to flash the code without any error message) as Aliexpress components can sometimes be defective out of the box.
-- The battery holder is surface mount but on the the back side comprising pins of through hole components: the good way to assemble the board is to **cut the pins** of the front side components as short as possible **before** soldering so that the solder joints are as flat as possible on the back side. Trimming them after soldering is not enough and you risk to cut traces by trimming too short.
 - If possible, try to remove as much flux residues as you can but beware to the TFT display, it is very sensitive to dipping into IPA.
 
 ## User Manual in 4 steps
 
-- Insert a CR2032 battery and power it on.
 - Press the button to cycle through palettes. Pressing it while booting activates a debug mode that shows minimal informations.
 - Strut through the city, proudly showing off your Pico Slide Show.
-- Question your life choices as you ponder the environmental cost of single-use lithium batteries for this purpose.
-
-## Dev notes
-
-- The RP2040 Zero and the TFT display can be powered in 3.3V or 5V only (no VSYS pins available, this is a simplified board). I used a 5V DC/DC converter here just because I have some in stock and to keep hardware compatibility with some of my other projects requiring 5V. It can be replaced easily by a 3.3V DC/DC converter after a minor PCB re-routing.
-- Using a rechargeable lithium battery would be cool but pre-assembled charge-discharge circuits are too bulky for my own taste (I wanted the board to be light and small). It is probably possible to create a much smaller and energy efficient custom PCB with SMD components only, feel free to do it !
 
 ## Kind warning
 
