@@ -23,6 +23,8 @@ So, this is how to proceed:
 - Open **Pico_slide_show.ino** with the Arduino IDE;
 - Compile your code with the RP2040 core (select the Raspberry Pi Pico board and compile at 50 MHz) and upload directly or drop the pre-compiled .uf2 to your board.
 
+New palettes encoded in RGB565 can be very easily added.
+
 ## Parts needed to build the device
 
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
