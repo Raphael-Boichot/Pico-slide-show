@@ -44,9 +44,9 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 ## User Manual
 
-**For using:** rigth switch on **USE** position, whatever the position of left switch (ON/OFF).
-**For charging:** rigth switch on **CHARGE** position, left switch on **ON** position.
-**For changing palette:** push the only button.
+**- For using:** rigth switch on **USE** position, whatever the position of left switch (ON/OFF).
+**- For charging:** rigth switch on **CHARGE** position, left switch on **ON** position.
+**- For changing palette:** push the only button.
 
 ## Kind warning
 
