@@ -28,23 +28,25 @@ So, this is how to proceed:
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
 - A [0.85 inch 128x128 TFT display](https://www.aliexpress.com/item/1005008822385316.html). It must be that exact same one (ST7735 controller).
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
-- A [DD05CVSA charge-discharge circuit](https://www.aliexpress.com/item/1005005061314325.html).
+- A [DD05CVSA charge-discharge circuit](https://www.aliexpress.com/item/1005005061314325.html). This is a very reliable sub board, used on various projects.
 - [Male pin headers](https://www.aliexpress.com/item/4000873858801.html) with 2.54 mm spacing, if necessary, whatever the pin lenght, you will trim them anyway.
-- A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height; it can be harvested from any dead electronics, so it is common.
+- A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height. It can be harvested from any dead electronics, so it is common.
 - 2 [microswitches SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
-- A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html).
+- A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html). It is a quite common size on purpose.
 
 PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. 
 
 ## Assembly (read carefully before attempting anything)
 
 - I recommend testing the RP2040 Zero before soldering it (just try to flash the code without any error message) as Aliexpress components can sometimes be defective out of the box.
+- Trim the pins **BEFORE SOLDERING** as short as possible in order to not punch the battery side or scratch yourself if you wear it as cool pendant.
 - If possible, try to remove as much flux residues as you can but beware to the TFT display, it is very sensitive to dipping into IPA.
 
-## User Manual in 4 steps
+## User Manual
 
-- Press the button to cycle through palettes. Pressing it while booting activates a debug mode that shows minimal informations.
-- Strut through the city, proudly showing off your Pico Slide Show.
+**For using:** rigth switch on **USE** position, whatever the position of left switch (ON/OFF).
+**For charging:** rigth switch on **CHARGE** position, left switch on **ON** position.
+**For changing palette:** push the only button.
 
 ## Kind warning
 
