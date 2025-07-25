@@ -1,6 +1,6 @@
 # Flex in the city with your Game Boy Camera images
 
-This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by a single CR2XXX lithium battery.
+This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by 500 mA.h lithium battery.
 
 ## Environment configuration
 
@@ -37,6 +37,8 @@ New palettes encoded in RGB565 can be very easily added.
 - A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html). It is a quite common size on purpose.
 
 PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. 
+
+![](/PCB/PCB.png)
 
 ## Assembly (read carefully before attempting anything)
 
