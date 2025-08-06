@@ -46,7 +46,7 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 - I recommend testing the RP2040 Zero before soldering it (just try to flash the code without any error message) as Aliexpress components can sometimes be defective out of the box.
 - Trim the pins **BEFORE SOLDERING** as short as possible for each component in order to not punch the battery side or scratch yourself if you wear it as cool pendant.
-- Populate the front side before, test and if everything is OK, populate the back side.
+- Populate the front side before, test and if everything is OK, populate the back side. Stuck the battery with small patches of double sided tape in order to ba able to remove it, just in case.
 - If possible, try to remove as much flux residues as you can but beware to the TFT display, it is very sensitive to dipping into IPA.
 
 ![](/Pictures/Showcase_1.png)
