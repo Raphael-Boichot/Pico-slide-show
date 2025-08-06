@@ -16,7 +16,9 @@ This project is a simple design for a tiny digital frame that displays Game Boy 
 
 ## Image conversion and compiling
 
-The Arduino IDE does not allow directly scripting the two tasks (image converter and compiler) easily like other dev platforms. It's possible but more complicated than just running GNU Octave and the compiler separately.
+Images are directly embedded into the Pi Pico flash memory, encoded in Game Boy Tile Format. So the repository comes with an image converter as well as the code for the Pi Pico itself.
+
+The Arduino IDE does not allow directly scripting the two tasks (image converting and Pi Pico SDK code compiling) easily like other dev platforms. It's possible but more complicated than just running GNU Octave and the compiler separately.
 
 So, this is how to proceed:
 
