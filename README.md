@@ -2,6 +2,8 @@
 
 This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by 500 mA.h lithium battery.
 
+![](/Pictures/Showcase_2.jpg)
+
 ## Environment configuration
 
 - Install the latest [Arduino IDE](https://www.arduino.cc/en/software)
@@ -43,8 +45,11 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 ## Assembly (read carefully before attempting anything)
 
 - I recommend testing the RP2040 Zero before soldering it (just try to flash the code without any error message) as Aliexpress components can sometimes be defective out of the box.
-- Trim the pins **BEFORE SOLDERING** as short as possible in order to not punch the battery side or scratch yourself if you wear it as cool pendant.
+- Trim the pins **BEFORE SOLDERING** as short as possible for each component in order to not punch the battery side or scratch yourself if you wear it as cool pendant.
+- Populate the front side before, test and if everything is OK, populate the back side.
 - If possible, try to remove as much flux residues as you can but beware to the TFT display, it is very sensitive to dipping into IPA.
+
+![](/Pictures/Showcase_1.png)
 
 ## User Manual
 
