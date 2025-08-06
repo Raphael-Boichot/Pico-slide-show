@@ -23,14 +23,12 @@ void setup(void) {
   if (gpio_get(BTN_PUSH)) {
     debug_mode = 1;
   }
-  Booting_animation();                          //it's not an animation anymore
+  Booting_animation();
   img.createSprite(image_width, image_height);  // then create the giant sprite that will be an image of our video ram buffer
   seed_rng_from_adc();                          // Get entropy from ADC
 }  // setup()
 
-/////////////Specific to TinyGB Printer//////////////
-
-void loop()  //core 1 loop deals with images, written by Raphaël BOICHOT, november 2024
+void loop()
 {
 
   currentMillis = millis();
