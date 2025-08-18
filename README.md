@@ -4,6 +4,8 @@ This project is a simple design for a tiny digital frame that displays Game Boy 
 
 To my knowledge, this is also the smallest digital frame in the world.
 
+It can take as input: images in any format (as long as it is 2 bpp, all lossless printing format from any printer emulator are supported and automatically cropped and resized), raw saves without need for any conversion or raw ROM dumps from flashable Game Boy Camera equipped with [Photo!](https://github.com/untoxa/gb-photo)
+
 ![](/Pictures/Showcase_2.jpg)
 (Credit: Raphaël BOICHOT)
 
@@ -21,7 +23,7 @@ To my knowledge, this is also the smallest digital frame in the world.
 
 Images are directly embedded into the Pi Pico flash memory, encoded in Game Boy Tile Format. So the repository comes with an image converter as well as the code for the Pi Pico itself.
 
-The Arduino IDE does not allow directly scripting the two tasks (image converting and Pi Pico SDK code compiling) easily like other dev platforms. It's possible but more complicated than just running GNU Octave and the compiler separately.
+The Arduino IDE does not allow easily scripting the two tasks (image converting and Pi Pico SDK code compiling) like other dev platforms. It's possible but more complicated than just running the GNU Octave converter and the Arduino IDE compiler separately.
 
 So, this is how to proceed:
 
