@@ -69,7 +69,8 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 
 ## Troubleshooting
 
-If you struggle compiling the code, just open an issue, send me your batch of images and I can do the compiling for you.
+- If you struggle compiling the code, just open an issue, send me your batch of images and I can do the compiling for you.
+- Boot the device while pressing the pushbutton and it will display debug informations in addition to the images. Not that useful for normal use but it would allow you to check if images are missing and why.
 
 ## Kind warning
 
