@@ -2,6 +2,8 @@
 
 This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by 500 mA.h lithium battery.
 
+To my knowledge, this is also the smallest digital frame in the world.
+
 ![](/Pictures/Showcase_2.jpg)
 (Credit: Raphaël BOICHOT)
 
