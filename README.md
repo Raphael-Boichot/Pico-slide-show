@@ -30,7 +30,7 @@ So, this is how to proceed:
 
 New palettes encoded in RGB565 can be very easily added.
 
-The code and board design are so basic that they can probably be ported to an ESP32 mini without difficulty.
+The code and board design are so basic that they can probably be ported to an ESP32 mini without difficulty. The GNU Octave code may also be very easy to convert in Python with your prefered LLM.
 
 ## Parts needed to build the device
 
@@ -39,7 +39,7 @@ The code and board design are so basic that they can probably be ported to an ES
 - A [Waveshare RP2040 Zero (or copy)](https://www.aliexpress.com/item/1005003504006451.html), **with pin header** (or add some);
 - A [DD05CVSA charge-discharge circuit](https://www.aliexpress.com/item/1005005061314325.html). This is a very reliable sub board, used on various projects.
 - [Male pin headers](https://www.aliexpress.com/item/4000873858801.html) with 2.54 mm spacing, if necessary, whatever the pin lenght, you will trim them anyway.
-- A [6x6 push button](https://www.aliexpress.com/item/1005003938244847.html), any height. It can be harvested from any dead electronics, so it is common.
+- A [6x6 push button, 4 pins](https://www.aliexpress.com/item/1005003938244847.html), any height. It can be harvested from any dead electronics, so it is common.
 - 2 [microswitches SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
 - A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html). It is a quite common size on purpose.
 
