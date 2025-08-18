@@ -11,10 +11,10 @@ It can take as input: images in any format (as long as it is 2 bpp, all lossless
 
 ## Environment configuration
 
-- Install the latest [Arduino IDE](https://www.arduino.cc/en/software)
-- Install the [Earle F. Philhower Raspberry Pi Pico Arduino core for Arduino IDE](https://github.com/earlephilhower/arduino-pico) via the Arduino Board manager (see [installation guide](https://github[...])
+- Install the latest [Arduino IDE](https://www.arduino.cc/en/software);
+- Install the [Earle F. Philhower Raspberry Pi Pico Arduino core for Arduino IDE](https://github.com/earlephilhower/arduino-pico) via the Arduino Board manager (see [installation guide](https://github[...]);
 - Install the Bodmer [TFT_eSPI library](https://github.com/Bodmer/TFT_eSPI) via the Arduino library manager;
-- Locate the TFT_eSPI library: **\Arduino\libraries\TFT_eSPI** folder in your Arduino libraries and copy the [configuration file](/Pico_slide_show/TFT_setup) for the TFT display in this folder.
+- Locate the TFT_eSPI library: **\Arduino\libraries\TFT_eSPI** folder in your Arduino libraries and copy the [configuration file](/Pico_slide_show/TFT_setup) for the TFT display in this folder;
 - Edit the **User_Setup_Select.h** and modify line 29:
     **#include <Pico_slide_show_TFT_eSPI_setup.h> // Default setup is root library folder**
 - Install [GNU Octave](https://www.octave.org/). It is a multi-OS computing language requiring no dependencies, used to convert save files.
@@ -27,7 +27,7 @@ The Arduino IDE does not allow easily scripting the two tasks (image converting 
 
 So, this is how to proceed:
 
-- Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images into the **/Images** folder or rom dumps from [Photo!](https://github.com/untoxa/gb-photo) into the **/Roms** folder. You can drop and show as many as 540 images in a single build (up to 540, extra images will be discarded with a warning). Any format coming from any known emulator existing on Earth is accepted as long as it is 4 colors (2bbp).
+- Drop Game Boy Camera saves into the **/saves** folder or Game Boy Camera images into the **/Images** folder or rom dumps from [Photo!](https://github.com/untoxa/gb-photo) into the **/Roms** folder. You can drop and show as many as 540 images in a single build (up to 540, extra images will be discarded with a warning). Any format coming from any known emulator existing on Earth is accepted as long as it is 4 colors (2bbp);
 - Run **Make_header_from_saves.m** from GNU Octave. It converts binary Game Boy Camera saves and images to C-compatible data. You can also set the delay between images in ms from this script;
 - Open **Pico_slide_show.ino** with the Arduino IDE;
 - Compile your code with the RP2040 core (select the Raspberry Pi Pico board and compile at 50 MHz) and upload directly or drop the pre-compiled .uf2 to your board.
