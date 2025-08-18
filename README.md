@@ -3,6 +3,7 @@
 This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by 500 mA.h lithium battery.
 
 ![](/Pictures/Showcase_2.jpg)
+(Credit: Raphaël BOICHOT)
 
 ## Environment configuration
 
@@ -29,6 +30,8 @@ So, this is how to proceed:
 
 New palettes encoded in RGB565 can be very easily added.
 
+The code and board design are so basic that they can probably be ported to an ESP32 mini without difficulty.
+
 ## Parts needed to build the device
 
 - The [custom PCB](/PCB), any thickness, any finish, any color. Order at [JLCPCB](https://jlcpcb.com/) with the gerber .zip;
@@ -52,12 +55,17 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 - If possible, try to remove as much flux residues as you can but beware to the TFT display, it is very sensitive to dipping into IPA.
 
 ![](/Pictures/Showcase_1.png)
+(Credit: Raphaël BOICHOT)
 
 ## User Manual
 
 - **For using:** rigth switch on **USE** position, whatever the position of left switch (ON/OFF).
 - **For charging:** rigth switch on **CHAR.** (charge) position, left switch on **ON** position. Charge until green led on the charge module.
 - **For changing palette:** push the **PALETTE** button.
+
+## Troubleshooting
+
+If you struggle compiling the code, just open an issue, send me your batch of images and I can do the compiling for you.
 
 ## Kind warning
 
