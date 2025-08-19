@@ -72,6 +72,9 @@ PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). 
 - If you struggle compiling the code, just open an issue, send me your batch of images and I can do the compiling for you.
 - Boot the device while pressing the pushbutton and it will display debug informations in addition to the images. Not that useful for normal use but it would allow you to check if images are missing and why.
 
+![](/Pictures/Debug_mode.jpg)
+(Credit: Raphaël BOICHOT)
+
 ## Kind warning
 
 The code and design are provided as-is. If you're not satisfied with the current hardware, the PCB layout in EasyEDA, the GNU Octave scripts, or the Arduino IDE setup - feel free to create your own; the license permits it! Do not hesitate to get in touch with me to compile your images if you struggle to configure the setup.
