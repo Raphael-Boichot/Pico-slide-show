@@ -45,9 +45,9 @@ The code and board design are so basic that they can probably be ported to an ES
 - [Male pin headers](https://www.aliexpress.com/item/4000873858801.html) with 2.54 mm spacing, if necessary, whatever the pin lenght, you will trim them anyway.
 - A [6x6 push button, 4 pins](https://www.aliexpress.com/item/1005003938244847.html), any height. It can be harvested from any dead electronics, so it is common.
 - 2 [microswitches SS-12D00G](https://www.aliexpress.com/item/1005003938856402.html) to cut the main power.
-- A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html). It is a quite common size on purpose.
+- A [503035 500 mA.h Lipo Battery](https://www.aliexpress.com/item/1005006421563695.html). It is a quite common size on purpose. 
 
-PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. 
+PCB designs can be edited with [EasyEDA Standard Edition](https://easyeda.com). EU citizens are advised to order PCBs at [JLCPCB](https://jlcpcb.com/) to avoid additional prohibitive taxes with customs. Also I made some endurance tests with the proposed battery and it lasts at least for 5 hours (and probably more).
 
 ![](/PCB/PCB.png)
 
