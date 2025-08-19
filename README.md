@@ -2,9 +2,9 @@
 
 This project is a simple design for a tiny digital frame that displays Game Boy Camera images - because what better use of modern electronics than reviving 128×112 pixel grayscale selfies from the nineties ? It’s compact, portable, easy to build, and powered by 500 mA.h lithium battery.
 
-To my knowledge, this is also the smallest digital frame in the world.
+To my knowledge, this is also the smallest digital frame in the world. Of course, the TFT display has a pixel perfect matching with Game Boy Camera images (no stretching or interpolation are used).
 
-It can take as input: images in any format (as long as it is 2 bpp, all lossless printing format from any printer emulator are supported and automatically cropped and resized), raw saves without need for any conversion or raw ROM dumps from flashable Game Boy Camera equipped with [Photo!](https://github.com/untoxa/gb-photo)
+It can take as input: images in any format (as long as it is 2 bpp, all lossless printing format from any printer emulator are supported and automatically cropped and resized to pixel perfect images), raw saves without need for any conversion or raw ROM dumps from flashable Game Boy Camera equipped with [Photo!](https://github.com/untoxa/gb-photo)
 
 ![](/Pictures/Showcase_2.jpg)
 (Credit: Raphaël BOICHOT)
